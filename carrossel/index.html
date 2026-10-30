@@ -10,8 +10,7 @@
 <style>
 :root{
   --bg:#f3f1ec; --painel:#fffefb; --tinta:#1b211d; --tinta-2:#5f6862; --linha:#e2e0d8;
-  --batom:#b4374e; --azeitona:#2c3a2f; --rose:#f2d9db; --porcelana:#eef0ec; --salvia:#d3dccf;
-  /* tema do carrossel */
+  --batom:#b4374e; --azeitona:#2c3a2f; --rose:#f2d9db;
   --c-fundo:#fafbf8; --c-tinta:#1e2620; --c-acento:#b4374e; --c-capa:#f2d9db; --c-escuro:#2c3a2f;
 }
 :root[data-theme="dark"]{ --bg:#141815; --painel:#1c211e; --tinta:#eef0ec; --tinta-2:#a3aca5; --linha:#2d3530 }
@@ -19,43 +18,51 @@
 *{ box-sizing:border-box; margin:0; padding:0 }
 body{ background:var(--bg); color:var(--tinta); font-family:"Figtree",system-ui,sans-serif; min-height:100vh }
 button{ font:inherit; cursor:pointer }
+button[disabled]{ cursor:not-allowed }
 
-.topo{ display:flex; align-items:center; justify-content:space-between; padding:18px 32px; border-bottom:1px solid var(--linha) }
+.topo{ display:flex; align-items:center; justify-content:space-between; gap:16px; padding:18px 32px; border-bottom:1px solid var(--linha) }
 .logo{ display:flex; align-items:center; gap:12px; font-weight:700; letter-spacing:-.01em }
 .logo .m{ width:34px; height:34px; border-radius:10px; background:var(--batom); color:#fff; display:grid; place-items:center; font-family:"Young Serif",serif; font-size:18px }
 .logo small{ font-weight:500; color:var(--tinta-2); margin-left:4px }
-.chip-plano{ font-family:"JetBrains Mono",monospace; font-size:12px; padding:7px 12px; border:1px solid var(--linha); border-radius:99px; color:var(--tinta-2) }
+.chip-plano{ font-family:"JetBrains Mono",monospace; font-size:12px; padding:7px 12px; border:1px solid var(--linha); border-radius:99px; color:var(--tinta-2); white-space:nowrap }
 .chip-plano b{ color:var(--batom) }
 
 .app{ display:grid; grid-template-columns:380px 1fr; min-height:calc(100vh - 71px) }
-.lado{ border-right:1px solid var(--linha); padding:30px 28px; display:flex; flex-direction:column; gap:28px; background:var(--painel) }
+.lado{ border-right:1px solid var(--linha); padding:30px 28px; display:flex; flex-direction:column; gap:26px; background:var(--painel) }
 .rot{ font-size:12px; letter-spacing:.14em; text-transform:uppercase; color:var(--tinta-2); font-weight:600; margin-bottom:12px }
-textarea{ width:100%; min-height:96px; resize:none; border:1px solid var(--linha); border-radius:14px; padding:14px 16px; font:500 17px/1.4 "Figtree",sans-serif; background:var(--bg); color:var(--tinta); outline:none }
+textarea{ width:100%; min-height:110px; resize:none; border:1px solid var(--linha); border-radius:14px; padding:14px 16px; font:500 17px/1.4 "Figtree",sans-serif; background:var(--bg); color:var(--tinta); outline:none }
 textarea:focus{ border-color:var(--batom) }
-.sug{ display:flex; flex-wrap:wrap; gap:8px; margin-top:12px }
-.sug button{ border:1px solid var(--linha); background:transparent; color:var(--tinta); border-radius:99px; padding:8px 13px; font-size:14px; transition:.2s }
-.sug button:hover{ border-color:var(--batom); color:var(--batom) }
+textarea.erro{ border-color:var(--batom); animation:tremer .35s }
+@keyframes tremer{ 25%{ transform:translateX(-5px) } 75%{ transform:translateX(5px) } }
+.dica{ font-size:13px; color:var(--tinta-2); margin-top:8px }
 .temas{ display:grid; grid-template-columns:repeat(3,1fr); gap:10px }
 .tema{ border:1.5px solid var(--linha); border-radius:14px; padding:10px; background:transparent; color:var(--tinta); text-align:left; font-size:13px; font-weight:600 }
 .tema .sw{ display:flex; height:30px; border-radius:8px; overflow:hidden; margin-bottom:8px }
 .tema .sw i{ flex:1 }
 .tema[aria-pressed="true"]{ border-color:var(--batom); box-shadow:0 0 0 3px color-mix(in srgb, var(--batom) 18%, transparent) }
-.formatos{ display:flex; gap:8px }
-.formatos button{ flex:1; border:1.5px solid var(--linha); background:transparent; color:var(--tinta); border-radius:12px; padding:10px; font-size:14px; font-weight:600 }
+.formatos{ display:grid; grid-template-columns:1fr 1fr; gap:8px }
+.formatos button{ border:1.5px solid var(--linha); background:transparent; color:var(--tinta); border-radius:12px; padding:11px 8px; font-size:14px; font-weight:600 }
 .formatos button[aria-pressed="true"]{ border-color:var(--tinta); background:var(--tinta); color:var(--painel) }
-.gerar{ margin-top:auto; border:0; background:var(--batom); color:#fff; font-weight:700; font-size:17px; padding:18px; border-radius:16px; display:flex; align-items:center; justify-content:center; gap:10px; transition:transform .15s, filter .2s }
+.rodape-lado{ margin-top:auto; display:grid; gap:10px }
+.uso{ display:flex; justify-content:space-between; font-size:13px; color:var(--tinta-2) }
+.uso b{ color:var(--tinta) }
+.barra{ height:6px; border-radius:99px; background:var(--linha); overflow:hidden }
+.barra i{ display:block; height:100%; background:var(--batom); transition:width .4s }
+.gerar{ border:0; background:var(--batom); color:#fff; font-weight:700; font-size:17px; padding:18px; border-radius:16px; display:flex; align-items:center; justify-content:center; gap:10px; transition:transform .15s, filter .2s }
 .gerar:hover{ filter:brightness(1.07) } .gerar:active{ transform:scale(.98) }
-.gerar[disabled]{ filter:grayscale(.4) opacity(.8); cursor:wait }
+.gerar[disabled]{ filter:grayscale(.5) opacity(.7) }
 
-.palco{ padding:36px 40px; display:flex; flex-direction:column; gap:22px; overflow:hidden }
+.palco{ padding:36px 40px; display:flex; flex-direction:column; gap:22px; overflow:hidden; min-width:0 }
 .cab{ display:flex; align-items:flex-end; justify-content:space-between; gap:20px; flex-wrap:wrap }
-.cab h1{ font-family:"Young Serif",serif; font-weight:400; font-size:clamp(26px,3vw,40px); line-height:1.1; max-width:720px }
+.cab h1{ font-family:"Young Serif",serif; font-weight:400; font-size:clamp(26px,3vw,40px); line-height:1.1; max-width:760px; text-wrap:balance }
 .cab p{ color:var(--tinta-2); margin-top:6px }
-.status{ font-family:"JetBrains Mono",monospace; font-size:13px; color:var(--tinta-2); min-height:20px }
+.status{ font-family:"JetBrains Mono",monospace; font-size:13px; color:var(--tinta-2); min-height:20px; line-height:1.5 }
 .acoes{ display:flex; gap:10px }
 .acoes button{ border:1px solid var(--linha); background:var(--painel); color:var(--tinta); border-radius:12px; padding:11px 16px; font-weight:600; font-size:14px }
+.acoes button[disabled]{ opacity:.45 }
 
 .trilho{ display:grid; grid-auto-flow:column; grid-auto-columns:max(200px, calc((100% - 72px) / 5)); gap:18px; overflow-x:auto; padding:6px 2px 18px; scroll-snap-type:x mandatory }
+.vazio{ aspect-ratio:4/5; border-radius:18px; border:1.5px dashed var(--linha); display:grid; place-items:center; color:var(--tinta-2); font-family:"JetBrains Mono",monospace; font-size:13px }
 .card{ scroll-snap-align:start; aspect-ratio:4/5; border-radius:18px; position:relative; overflow:hidden; background:var(--c-fundo); color:var(--c-tinta); container-type:inline-size; display:flex; flex-direction:column; box-shadow:0 1px 0 rgba(0,0,0,.04), 0 24px 40px -30px rgba(20,30,22,.55);
   opacity:0; transform:translateY(24px) scale(.97); transition:opacity .6s cubic-bezier(.2,.8,.2,1), transform .7s cubic-bezier(.2,.8,.2,1) }
 .card.on{ opacity:1; transform:none }
@@ -65,42 +72,46 @@ textarea:focus{ border-color:var(--batom) }
 .card .s{ font-size:5cqw; line-height:1.38; opacity:.8; text-wrap:pretty }
 .card .pe{ margin-top:auto; padding:0 8cqw 6cqw; font-size:3.8cqw; letter-spacing:.08em; text-transform:uppercase; display:flex; justify-content:space-between; opacity:.7; position:relative; z-index:2 }
 .card .chip{ align-self:flex-start; font-size:3.8cqw; font-weight:700; letter-spacing:.14em; text-transform:uppercase; padding:1.8cqw 3.6cqw; border-radius:99px; background:var(--c-acento); color:#fff }
-/* 1 capa: bloco batom, numeral gigante vazado atrás, recorte dela */
+.card .selo{ align-self:flex-start; font-size:3.6cqw; font-weight:700; letter-spacing:.16em; text-transform:uppercase; padding:1.6cqw 3.4cqw; border-radius:2cqw; background:var(--c-acento); color:#fff }
+.card .selo.verdade{ background:#3f6b4a }
+.card .selo.erro{ background:var(--c-tinta); color:var(--c-fundo) }
+.card .selo.passo{ background:var(--c-capa); color:var(--c-tinta) }
+/* capa */
 .k-capa{ background:var(--c-acento); color:#fff }
 .k-capa .big{ position:absolute; right:-8cqw; top:44cqw; font-family:"Young Serif",serif; font-size:84cqw; line-height:.8; color:transparent; -webkit-text-stroke:.5cqw rgba(255,255,255,.35); z-index:0 }
 .k-capa .chip{ background:#fff; color:var(--c-acento) }
-.k-capa .t{ font-size:9.4cqw; color:#fff; max-width:92% }
-.k-capa img{ position:absolute; left:-2cqw; bottom:0; height:52%; z-index:1; filter:drop-shadow(0 4cqw 6cqw rgba(0,0,0,.25)) }
+.k-capa .t{ font-size:8.6cqw; color:#fff; max-width:92% }
+.k-capa .t.longo{ font-size:7.2cqw }
+.k-capa img{ position:absolute; left:-2cqw; bottom:0; height:50%; z-index:1; filter:drop-shadow(0 4cqw 6cqw rgba(0,0,0,.25)) }
 .k-capa .pe{ justify-content:flex-end; opacity:1 }
 .k-capa .pe span{ background:#fff; color:var(--c-acento); font-weight:700; padding:2cqw 4cqw; border-radius:99px; letter-spacing:.04em }
-/* 2 item claro: numeral grande + foto em círculo */
-.k-a{ background:var(--c-fundo) }
+/* item claro: numeral grande + foto em círculo */
 .k-a .n{ font-size:30cqw; line-height:.8; color:transparent; -webkit-text-stroke:.45cqw var(--c-acento) }
-.k-a .circ{ position:absolute; right:-8cqw; bottom:-8cqw; width:52cqw; height:52cqw; border-radius:50%; overflow:hidden; border:2cqw solid var(--c-capa) }
+.k-a .circ{ position:absolute; right:-8cqw; bottom:-8cqw; width:50cqw; height:50cqw; border-radius:50%; overflow:hidden; border:2cqw solid var(--c-capa) }
 .k-a .circ img{ width:100%; height:100%; object-fit:cover }
-.k-a .corpo{ max-width:100% }
-.k-a .s{ max-width:56% }
+.k-a .t{ font-size:7.4cqw }
+.k-a .s{ max-width:54% }
 .k-a .pe span:last-child{ display:none }
-/* 3 foto inteira */
+/* foto inteira */
 .k-foto{ color:#fff }
 .k-foto > img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover }
-.k-foto::after{ content:""; position:absolute; inset:0; background:linear-gradient(180deg, rgba(15,20,17,.1) 0%, rgba(15,20,17,0) 30%, rgba(15,20,17,.82) 78%); z-index:1 }
+.k-foto::after{ content:""; position:absolute; inset:0; background:linear-gradient(180deg, rgba(15,20,17,.15) 0%, rgba(15,20,17,0) 28%, rgba(15,20,17,.86) 74%); z-index:1 }
 .k-foto .corpo{ margin-top:auto; padding-bottom:4cqw }
-.k-foto .n{ color:#fff; font-size:5cqw; letter-spacing:.14em; font-family:"Figtree",sans-serif; font-weight:700; text-transform:uppercase }
-.k-foto .t{ font-size:9cqw }
+.k-foto .n{ color:#fff; font-size:5cqw; letter-spacing:.14em; font-family:"Figtree",sans-serif; font-weight:700 }
+.k-foto .t{ font-size:8cqw }
 .k-foto .pe{ margin-top:0; opacity:.85 }
-/* 4 item sálvia: foto em arco no topo */
+/* item rosado: foto em arco */
 .k-b{ background:var(--c-capa) }
-.k-b .arcof{ height:46%; flex:none; margin:6cqw 8cqw 0; border-radius:40cqw 40cqw 4cqw 4cqw; overflow:hidden }
+.k-b .arcof{ height:44%; flex:none; margin:6cqw 8cqw 0; border-radius:40cqw 40cqw 4cqw 4cqw; overflow:hidden }
 .k-b .arcof img{ width:100%; height:100%; object-fit:cover; display:block }
 .k-b .corpo{ padding-top:5cqw; gap:2cqw }
 .k-b .n{ font-size:7cqw }
-.k-b .t{ font-size:7.6cqw }
-.k-b .s{ font-size:4.8cqw }
-/* 5 fim escuro: aspas gigantes + recorte + CTA */
+.k-b .t{ font-size:7cqw }
+.k-b .s{ font-size:4.6cqw }
+/* fim */
 .k-fim{ background:var(--c-escuro); color:#f4f5f1 }
 .k-fim .aspas{ font-family:"Young Serif",serif; font-size:30cqw; line-height:1; color:var(--c-acento); height:14cqw; margin-top:2cqw }
-.k-fim .t{ font-size:8.6cqw; max-width:100% }
+.k-fim .t{ font-size:8.2cqw }
 .k-fim .s{ max-width:58% }
 .k-fim .cta{ align-self:flex-start; background:var(--c-acento); color:#fff; font-weight:700; font-size:4.4cqw; padding:3cqw 5cqw; border-radius:99px; margin-top:1cqw }
 .k-fim img{ position:absolute; right:-6cqw; bottom:0; height:42%; z-index:1 }
@@ -110,6 +121,7 @@ textarea:focus{ border-color:var(--batom) }
 
 .rodape{ display:flex; gap:28px; flex-wrap:wrap; color:var(--tinta-2); font-size:14px; border-top:1px solid var(--linha); padding-top:18px }
 .rodape b{ color:var(--tinta) }
+.rodape a{ color:inherit }
 
 @media (max-width:900px){
   .app{ grid-template-columns:1fr } .lado{ border-right:0; border-bottom:1px solid var(--linha); padding:22px 16px }
@@ -117,160 +129,253 @@ textarea:focus{ border-color:var(--batom) }
   .trilho{ grid-auto-columns:78% }
 }
 @media (prefers-reduced-motion:reduce){ .card{ transition:none } .esq{ animation:none } }
-body.png .topo, body.png .lado, body.png .cab, body.png .status, body.png .rodape{ display:none }
-body.png .app{ display:block; min-height:0 } body.png .palco{ padding:40px; background:#eef0ec }
-body.png .trilho{ overflow:visible; grid-auto-columns:1fr }
-body.png2 .trilho{ grid-auto-flow:row; grid-template-columns:repeat(6,1fr); gap:28px; width:1000px; padding:0 }
-body.png2 .card{ grid-column:span 2 } body.png2 .card:nth-child(4){ grid-column:2 / span 2 }
-body.png2 .palco{ background:transparent; padding:20px }
 </style>
 </head>
 <body>
 <header class="topo">
   <div class="logo"><span class="m">M</span>Carrossel da Má <small>por AlgUp</small></div>
-  <span class="chip-plano">assinatura · <b>R$ 29,90</b>/mês</span>
+  <span class="chip-plano">assinatura · <b>R$ 39,90</b>/mês · 20 carrosséis</span>
 </header>
 
 <main class="app">
   <aside class="lado">
     <div>
       <div class="rot">Sobre o que é o post?</div>
-      <textarea id="tema">3 sinais de que sua relação com a comida está te sabotando</textarea>
-      <div class="sug" id="sug"></div>
-    </div>
-    <div>
-      <div class="rot">Cores</div>
-      <div class="temas" id="temas"></div>
+      <textarea id="tema" placeholder="Ex.: como parar de beliscar à tarde"></textarea>
+      <div class="dica">Escreva do seu jeito. Enter gera o carrossel.</div>
     </div>
     <div>
       <div class="rot">Formato</div>
       <div class="formatos" id="formatos">
         <button aria-pressed="true" data-f="lista">Lista</button>
         <button aria-pressed="false" data-f="mito">Mito ou verdade</button>
+        <button aria-pressed="false" data-f="passos">Passo a passo</button>
+        <button aria-pressed="false" data-f="erros">Erros comuns</button>
       </div>
     </div>
-    <button class="gerar" id="gerar">Gerar carrossel <span aria-hidden="true">→</span></button>
+    <div>
+      <div class="rot">Cores</div>
+      <div class="temas" id="temas"></div>
+    </div>
+    <div class="rodape-lado">
+      <div class="uso"><span>Carrosséis este mês</span><span><b id="usados">0</b> de <span id="limite">20</span></span></div>
+      <div class="barra"><i id="barra" style="width:0"></i></div>
+      <button class="gerar" id="gerar">Gerar carrossel <span aria-hidden="true">→</span></button>
+    </div>
   </aside>
 
   <section class="palco">
     <div class="cab">
       <div>
-        <h1 id="titulo">Escreva o tema, escolha as cores. O carrossel sai pronto.</h1>
-        <p>Com as suas fotos, o seu método e as regras do CFN.</p>
+        <h1 id="titulo">O que vamos postar hoje?</h1>
+        <p id="subtitulo">Escreva o tema ao lado e escolha o formato. O carrossel sai pronto, com as suas fotos e o seu método.</p>
       </div>
-      <div class="acoes"><button id="copiar">Copiar legenda</button><button id="baixar">Baixar as 5 telas</button></div>
+      <div class="acoes"><button id="copiar" disabled>Copiar legenda</button><button id="baixar" disabled>Baixar as 5 telas</button></div>
     </div>
     <div class="status" id="status"></div>
     <div class="trilho" id="trilho"></div>
     <div class="rodape">
-      <span><b>Ilimitado</b> carrosséis por mês</span>
+      <span><b>20</b> carrosséis por mês</span>
+      <span><b>4</b> formatos</span>
       <span><b>Legenda</b> do post pronta</span>
-      <span><b>Suas fotos</b> já recortadas</span>
-      <span><b>Pronto em</b> menos de 1 minuto</span>
+      <span><b>Dentro</b> das regras do CFN</span>
+      <span><a href="creditos.html" target="_blank" rel="noopener">Créditos das fotos</a></span>
     </div>
   </section>
 </main>
 
 <script>
-const IMG = { capa:"img/ma-recorte.webp", capa2:"img/ma-rindo-recorte.webp" };
+const LIMITE = 20;
+const FOTOS = [["f002-salada","salada"],["f006-salada","salada"],["f007-salada","salada"],["f012-fruta","fruta"],["f019-fruta","fruta"],["f020-fruta","fruta"],["f024-cafe-manha","cafe-manha"],["f030-agua","agua"],["f047-doce","doce"],["f060-feira","feira"],["f071-prato","prato"],["f072-cafe-manha","cafe-manha"],["f079-prato","prato"],["f081-cafe-manha","cafe-manha"],["f082-prato","prato"],["f089-cafe","cafe"],["f093-doce","doce"],["f117-cha","cha"],["f120-cha","cha"],["f127-cafe-manha","cafe-manha"],["f128-salada","salada"],["f133-cafe-manha","cafe-manha"],["f141-fruta","fruta"],["f142-fruta","fruta"],["f143-fruta","fruta"],["f157-massa","massa"],["f159-massa","massa"],["f168-doce","doce"],["f171-doce","doce"],["f177-cozinha","cozinha"],["f183-cozinha","cozinha"],["f184-cozinha","cozinha"],["f187-cozinha","cozinha"]]
+  .map(([a,tag]) => ({ src:`img/fotos/${a}.jpg`, tag }));
 const TEMAS = [
   { nome:"Porcelana", v:{ "--c-fundo":"#fafbf8","--c-tinta":"#1e2620","--c-acento":"#b4374e","--c-capa":"#f2d9db","--c-escuro":"#2c3a2f" } },
   { nome:"Batom", v:{ "--c-fundo":"#fbf3f1","--c-tinta":"#3a1820","--c-acento":"#b4374e","--c-capa":"#e9b9c1","--c-escuro":"#7d2335" } },
   { nome:"Sálvia", v:{ "--c-fundo":"#f1f4ee","--c-tinta":"#1f2a22","--c-acento":"#4f6b52","--c-capa":"#d3dccf","--c-escuro":"#24302a" } },
 ];
-const CONTEUDO = {
-  "3 sinais de que sua relação com a comida está te sabotando": {
-    capa:"3 sinais de que sua relação com a comida está te sabotando", fotos:["img/n1.jpg","img/n6.jpg","img/n5.jpg"],
-    itens:[["Você come rápido, em pé, sem sentir o gosto.","A fome passa. A vontade continua."],
-           ["Na segunda, você “compensa” o fim de semana.",""],
-           ["O doce virou prêmio. E depois, culpa.","Comida não é recompensa nem castigo."]],
-    fim:["Se você se viu aqui, o problema não é força de vontade.","É método. Me chama no WhatsApp."],
-    legenda:"Qual desses sinais você reconheceu? 👀 Salva para lembrar e manda para aquela amiga que vive recomeçando a dieta na segunda."
-  },
-  "Por que dieta restritiva faz você voltar a engordar": {
-    capa:"Por que a dieta restritiva faz você voltar a engordar", fotos:["img/n4.jpg","img/n2.jpg","img/n7.jpg"],
-    itens:[["Cortar tudo deixa a fome no comando.","E fome no comando sempre vence."],
-           ["O corpo se adapta. A cabeça cansa.",""],
-           ["Quando a dieta acaba, o hábito antigo volta.","Porque nada foi construído no lugar."]],
-    fim:["Emagrecer de verdade é aprender a comer, não parar de comer.","Quer entender como? Me chama no WhatsApp."],
-    legenda:"Já passou pelo efeito sanfona? Eu passei. Comenta “EU” que eu te conto o que mudou."
-  },
-  "O que eu faria no seu prato hoje, sem cortar nada": {
-    capa:"O que eu faria no seu prato hoje, sem cortar nada", fotos:["img/n3.jpg","img/n7.jpg","img/n5.jpg"],
-    itens:[["Metade do prato colorido.","Salada, legumes, o que tiver aí."],
-           ["O arroz e o feijão ficam.",""],
-           ["Mude a ordem: comece pela salada.","Você chega no resto com menos pressa."]],
-    fim:["Pequenos ajustes, toda semana, sem sofrimento.","Esse é o Você Mais Magra. Me chama no WhatsApp."],
-    legenda:"Salva para o almoço de hoje 🍽️ e me conta: qual desses você já faz?"
-  },
-  "Mito ou verdade: comer à noite engorda?": {
-    capa:"Mito ou verdade: comer à noite engorda?", fotos:["img/n8.jpg","img/n6.jpg","img/n2.jpg"],
-    itens:[["Mito. O horário pesa menos que o total do dia.",""],
-           ["O problema é chegar à noite com fome de leão.",""],
-           ["Jantar leve e cedo ajuda no sono, não é regra.","Cada rotina pede um ajuste."]],
-    fim:["Chega de regra que ninguém consegue seguir.","Me chama no WhatsApp e a gente ajusta a sua."],
-    legenda:"Você janta tarde? Sem culpa. Salva esse post e manda para quem precisa ouvir isso."
-  }
-};
-const $ = s => document.querySelector(s);
-let temaAtual = 0;
 
-// sugestões e temas
-Object.keys(CONTEUDO).forEach(k => {
-  const b = document.createElement("button"); b.textContent = k.length > 34 ? k.slice(0,32)+"…" : k;
-  b.onclick = () => { $("#tema").value = k; gerar(); }; $("#sug").appendChild(b);
-});
-TEMAS.forEach((t,i) => {
-  const b = document.createElement("button"); b.className="tema"; b.setAttribute("aria-pressed", i===0);
+// Banco de conteúdo. Cada ideia rende os 4 formatos:
+// s/x = lista (sinal + explicação) · m = mito ou verdade · p = passo · e = erro
+const ASSUNTOS = [
+  { kw:["doce","açúcar","acucar","chocolate","brigadeiro","sobremesa","bolo","sorvete"], fotos:["doce","fruta"], ideias:[
+    { s:"O doce virou prêmio. E depois, culpa.", x:"Comida não é recompensa nem castigo.", m:["Quem quer emagrecer precisa cortar o doce.","MITO","Ele cabe no plano, na quantidade e na hora certas."], p:["Escolha o doce que você gosta de verdade","E coma com calma, sentada, sem culpa."], e:["Proibir o doce a semana inteira","A vontade cresce e vira exagero no sábado."] },
+    { s:"Bate vontade de doce logo depois do almoço.", x:"Muitas vezes, foi o prato que veio pobre.", m:["Vontade de doce pode ser sinal de que faltou comida antes.","VERDADE","Pular refeição deixa o corpo pedindo energia rápida."], p:["Monte um almoço completo","Proteína, salada e o arroz com feijão."], e:["Trocar a refeição pelo doce","A fome volta uma hora depois."] },
+    { s:"Um pedaço vira o pacote inteiro.", x:"Quando é raro e proibido, vira exagero.", m:["Doce diet pode ser comido à vontade.","MITO","Diet não é sinônimo de liberado."], p:["Sirva uma porção no prato","Comer do pote tira a noção de quantidade."], e:["Comer em pé, direto da embalagem","Sem prato, você não vê o quanto comeu."] },
+    { s:"Você come escondido o doce que 'não podia'.", x:"A proibição alimenta a vontade.", m:["Fruta pode ajudar na vontade de doce.","VERDADE","Fruta gelada ou banana com canela resolvem muita vontade."], p:["Tenha fruta pronta em casa","Lavada, cortada e à vista."], e:["Compensar o doce no dia seguinte","Fechar a boca só reinicia o ciclo."] },
+  ]},
+  { kw:["noite","jantar","janta","dormir","sono","madrugada"], fotos:["prato","cha","salada"], ideias:[
+    { s:"Você chega à noite com fome de leão.", x:"O jantar paga a conta do dia inteiro.", m:["Comer à noite engorda.","MITO","O total do dia pesa mais que o horário."], p:["Faça um lanche no meio da tarde","Você chega ao jantar sem desespero."], e:["Pular o lanche da tarde","A fome vem toda de uma vez à noite."] },
+    { s:"O jantar vira um 'beliscar' até dormir.", x:"Sem refeição, a noite vira petisco.", m:["Jantar leve ajuda a dormir melhor.","VERDADE","Prato pesado tarde atrapalha o sono de muita gente."], p:["Sente para jantar, com prato","Mesmo que seja algo simples."], e:["Comer no sofá, na frente da TV","A atenção vai para a tela, não para a fome."] },
+    { s:"Você troca o jantar por pão todo dia.", x:"É prático, mas não segura até de manhã.", m:["Quem janta tarde não pode comer carboidrato.","MITO","Ele pode entrar, numa porção pensada para você."], p:["Deixe um plano B pronto","Ovo, legumes e uma porção de arroz resolvem."], e:["Dormir com fome para 'compensar'","A fome volta maior no dia seguinte."] },
+    { s:"O chá virou o seu jantar.", x:"E a fome aparece de madrugada.", m:["Um chá depois do jantar pode ajudar a relaxar.","VERDADE","Camomila e erva-cidreira fazem parte do ritual de muita gente."], p:["Prepare um chá depois do jantar","Ajuda a fechar a cozinha."], e:["Substituir o jantar por chá","Chá acompanha. Não substitui."] },
+  ]},
+  { kw:["dieta","restrit","cortar","emagrec","perder peso","sanfona","engord","regime","jejum","quilos","kg"], fotos:["prato","salada","feira"], ideias:[
+    { s:"Você começa a dieta toda segunda.", x:"E desiste toda quinta.", m:["Dieta muito restritiva faz o peso voltar.","VERDADE","Quando ela acaba, o hábito antigo volta junto."], p:["Comece por uma refeição","Ajuste o café da manhã antes de mexer no resto."], e:["Cortar tudo de uma vez","O corpo se adapta. A cabeça cansa."] },
+    { s:"Cortar tudo deixa a fome no comando.", x:"E fome no comando sempre vence.", m:["Para emagrecer é preciso passar fome.","MITO","Com estratégia, dá para comer bem e emagrecer."], p:["Inclua antes de tirar","Mais salada e proteína primeiro."], e:["Copiar a dieta da amiga","O que funciona para ela pode não caber na sua rotina."] },
+    { s:"Você já fez todas as dietas e nenhuma ficou.", x:"Não faltou força de vontade. Faltou estratégia.", m:["Existe alimento que emagrece sozinho.","MITO","O que muda é o conjunto, não um ingrediente."], p:["Ajuste toda semana","Pequenas mudanças que cabem na rotina."], e:["Usar só a balança como medida","Roupa, disposição e exames também contam."] },
+    { s:"O efeito sanfona virou rotina.", x:"Perde, ganha, recomeça.", m:["Emagrecer devagar costuma durar mais.","VERDADE","Hábito construído com calma tende a ficar."], p:["Tenha acompanhamento de perto","Alguém para ajustar quando a vida muda."], e:["Tirar o arroz e o feijão","Eles podem ficar no prato, na medida certa."] },
+  ]},
+  { kw:["fome","ansiedade","ansiosa","belisc","compuls","emocional","estresse","saciedade","comer rápido","comer demais"], fotos:["cafe-manha","fruta","cozinha"], ideias:[
+    { s:"Você come rápido, em pé, sem sentir o gosto.", x:"A fome passa. A vontade continua.", m:["Comer devagar ajuda a perceber a saciedade.","VERDADE","O corpo leva alguns minutos para avisar que está satisfeito."], p:["Sente para comer","E apoie o garfo entre uma garfada e outra."], e:["Comer olhando o celular","Você termina o prato sem perceber que comeu."] },
+    { s:"Você belisca o dia inteiro e nunca fica satisfeita.", x:"Petisco não vira refeição.", m:["Ansiedade pode aumentar a vontade de comer.","VERDADE","Por isso o plano precisa considerar a sua rotina."], p:["Tenha horários de referência","Refeições com começo, meio e fim."], e:["Passar muitas horas sem comer","A fome acumulada vira beliscada."] },
+    { s:"A comida virou o jeito de aliviar o dia.", x:"E depois vem a culpa.", m:["Fome emocional se resolve só com força de vontade.","MITO","Ela pede estratégia e acolhimento, não castigo."], p:["Pergunte: é fome ou é cansaço?","Às vezes um banho resolve mais que um pacote."], e:["Se culpar depois de comer","A culpa puxa o próximo exagero."] },
+    { s:"Você chega em casa e abre a geladeira sem pensar.", x:"O dia passou sem comida de verdade.", m:["Quem tem fome o tempo todo tem falta de força de vontade.","MITO","Quase sempre é o plano que não está segurando."], p:["Leve um lanche na bolsa","Fruta ou iogurte evitam a fome de leão."], e:["Deixar só besteira à vista","O que está à mão é o que a gente come."] },
+  ]},
+  { kw:["água","agua","hidrat","inchaço","inchada","retenção","retencao","suco","sede"], fotos:["agua","cha","fruta"], ideias:[
+    { s:"Você só lembra da água quando a cabeça dói.", x:"A sede chega atrasada.", m:["Às vezes sede parece fome.","VERDADE","Um copo de água antes de beliscar ajuda a perceber."], p:["Deixe a garrafa à vista","Na mesa, no carro, na bolsa."], e:["Tomar tudo de uma vez à noite","Distribua ao longo do dia."] },
+    { s:"O suco virou o seu copo de água.", x:"Ele não substitui.", m:["Beber muita água emagrece.","MITO","Ela ajuda o corpo a funcionar, mas não faz milagre sozinha."], p:["Dê sabor com fruta e hortelã","Água saborizada, sem açúcar."], e:["Contar refrigerante zero como água","Prefira água de verdade."] },
+    { s:"Você se sente inchada no fim do dia.", x:"Pode ser pouca água e muito sal.", m:["Tomar água piora o inchaço.","MITO","Beber pouca água pode até piorar a retenção."], p:["Um copo a cada refeição","Já é um bom começo."], e:["Esquecer da água no calor","O corpo perde mais e pede mais."] },
+    { s:"Você passa a manhã inteira só no café.", x:"E a água fica para depois.", m:["Chá sem açúcar conta na hidratação.","VERDADE","Ajuda a bater a meta do dia."], p:["Comece o dia com um copo d'água","Antes mesmo do café."], e:["Esperar sentir sede","A sede é um aviso tardio."] },
+  ]},
+  { kw:["café da manhã","cafe da manha","manhã","manha","acordar","desjejum","tapioca","ovo","aveia","iogurte"], fotos:["cafe-manha","cafe","fruta"], ideias:[
+    { s:"Você sai de casa sem tomar café.", x:"E a fome cobra no meio da manhã.", m:["Pular o café da manhã emagrece.","MITO","Para muita gente, só empurra a fome para mais tarde."], p:["Deixe o café meio pronto na véspera","Fruta lavada, ovo cozido, aveia separada."], e:["Tomar só um café preto e sair","Segura pouco tempo."] },
+    { s:"Seu café da manhã é sempre pão com margarina.", x:"Prático, mas pode ser mais completo.", m:["Ovo no café da manhã ajuda a segurar a fome.","VERDADE","Proteína pela manhã ajuda na saciedade."], p:["Some uma proteína","Ovo, queijo ou iogurte."], e:["Tirar o pão porque 'engorda'","Ele pode ficar, com companhia."] },
+    { s:"Você toma café no carro, correndo.", x:"E nem lembra o que comeu.", m:["Existe um café da manhã perfeito para todo mundo.","MITO","O melhor é o que cabe na sua rotina."], p:["Tenha 3 opções fixas","Você alterna sem precisar pensar."], e:["Comer qualquer coisa da padaria","Sem plano, a escolha fica no impulso."] },
+    { s:"Às 10h você já está procurando o que beliscar.", x:"O café não segurou.", m:["Fruta no café da manhã é uma boa escolha.","VERDADE","Fibra, sabor e praticidade."], p:["Monte um café em 5 minutos","Iogurte, fruta e aveia."], e:["Exagerar no suco","Prefira a fruta inteira."] },
+  ]},
+  { kw:["fim de semana","final de semana","sábado","sabado","domingo","festa","aniversário","aniversario","churrasco","pizza","restaurante","viagem","compensar","segunda","natal","férias","ferias"], fotos:["prato","massa","doce"], ideias:[
+    { s:"Na segunda, você 'compensa' o fim de semana.", x:"E o ciclo recomeça.", m:["Dá para curtir o fim de semana e seguir o plano.","VERDADE","O fim de semana entra no planejamento."], p:["Escolha o que vale a pena","A pizza com a família vale. O pacote de biscoito, nem tanto."], e:["Ficar sem comer antes da festa","Você chega com fome e exagera."] },
+    { s:"Sexta à noite o plano acaba.", x:"E só volta na segunda.", m:["Um fim de semana estraga a semana toda.","MITO","Uma refeição não apaga o que você construiu."], p:["Mantenha as refeições do dia","Café e almoço normais, mesmo com festa à noite."], e:["Pensar 'já que saí, vou chutar o balde'","Saiu do plano? Volta na próxima refeição."] },
+    { s:"O churrasco de domingo vira prova de resistência.", x:"Ou de exagero.", m:["No churrasco dá para montar um prato equilibrado.","VERDADE","Salada, carne e um acompanhamento já fazem um bom prato."], p:["Comece pela salada","Você chega no resto com menos pressa."], e:["Beliscar em pé o tempo todo","Monte um prato e sente."] },
+    { s:"Você evita sair com as amigas por causa da dieta.", x:"Isso não se sustenta.", m:["Quem faz acompanhamento não pode ir a restaurante.","MITO","A vida social faz parte do plano."], p:["Olhe o cardápio antes","Escolher com calma evita o impulso."], e:["Se culpar no domingo à noite","Culpa não ajusta nada. Planejamento sim."] },
+  ]},
+  { kw:["rotina","marmita","tempo","trabalho","correria","organiz","planej","cardápio","cardapio","compras","mercado","cozinhar","receita","almoço","almoco","delivery"], fotos:["cozinha","feira","prato","salada"], ideias:[
+    { s:"Você não tem tempo de cozinhar na semana.", x:"E acaba no delivery.", m:["Comer bem exige horas na cozinha.","MITO","Uma base que se repete resolve a semana."], p:["Cozinhe uma base no domingo","Arroz, feijão, uma proteína e legumes."], e:["Querer um prato diferente todo dia","Repetir a base e variar o tempero funciona."] },
+    { s:"A lista de compras é o que lembrar na hora.", x:"E o carrinho volta cheio de besteira.", m:["Planejar as compras ajuda a comer melhor.","VERDADE","O que entra em casa é o que vai para o prato."], p:["Faça a lista a partir do cardápio","Só o que vai usar na semana."], e:["Ir ao mercado com fome","A fome escolhe por você."] },
+    { s:"Seu almoço é o que der tempo.", x:"E às vezes nem dá.", m:["Marmita congelada perde todo o valor.","MITO","Bem armazenada, ela é uma ótima aliada."], p:["Monte as marmitas em 1 hora","Divida em potes e congele."], e:["Pular o almoço por causa da reunião","A conta chega no fim da tarde."] },
+    { s:"Cada dia da semana é um improviso.", x:"E o improviso costuma ser pão.", m:["Ter horários ajuda a organizar a fome.","VERDADE","O corpo se acostuma com uma rotina."], p:["Defina 3 horários fixos","Café, almoço e jantar como âncoras."], e:["Esperar a semana 'ficar tranquila'","O plano tem que caber na correria."] },
+  ]},
+  { kw:["carboidrato","arroz","feijão","feijao","massa","macarrão","macarrao","pão","pao","batata","glúten","gluten","low carb","integral"], fotos:["massa","prato"], ideias:[
+    { s:"O arroz virou vilão no seu prato.", x:"Sem ele, a fome volta logo.", m:["Carboidrato engorda.","MITO","O que pesa é a quantidade e o conjunto do dia."], p:["Mantenha o arroz e o feijão","Ajuste a porção, não a presença."], e:["Tirar o carboidrato do almoço","E compensar com doce à tarde."] },
+    { s:"Você corta o pão e exagera no biscoito 'integral'.", x:"A troca não ajudou.", m:["Integral sempre é melhor que o branco.","MITO","Ajuda, mas o rótulo e a quantidade contam."], p:["Leia o rótulo","O primeiro ingrediente diz muito."], e:["Achar que integral é liberado","Continua contando no dia."] },
+    { s:"Macarrão só no domingo, e aí é o prato cheio.", x:"A restrição vira exagero.", m:["Dá para comer massa e emagrecer.","VERDADE","Com porção e acompanhamento certos."], p:["Some legumes à massa","Mais volume, mais saciedade."], e:["Proibir a massa a semana inteira","Domingo vira compensação."] },
+    { s:"Você tem medo de comer batata.", x:"E não sabe bem por quê.", m:["Feijão é um ótimo aliado.","VERDADE","Fibra e proteína vegetal no mesmo prato."], p:["Monte o prato pela metade","Metade salada, depois proteína e carboidrato."], e:["Seguir regra de internet","Cada corpo e cada rotina pedem um ajuste."] },
+  ]},
+];
+const GERAL = { fotos:["salada","prato","fruta","cozinha","cafe-manha"], ideias:[
+  { s:"Você já tentou de tudo e sempre volta ao ponto zero.", x:"Não faltou força de vontade.", m:["Existe uma regra que serve para todo mundo.","MITO","O plano certo é o que cabe na sua rotina."], p:["Comece pelo que é possível hoje","Um ajuste pequeno, mantido, vale mais."], e:["Querer mudar tudo de uma vez","Em duas semanas, cansa."] },
+  { s:"Você sabe o que fazer, mas não consegue manter.", x:"Falta estratégia, não informação.", m:["Acompanhamento de perto ajuda a manter os resultados.","VERDADE","Ajustar toda semana evita recomeçar do zero."], p:["Ajuste toda semana","A vida muda. O plano acompanha."], e:["Seguir dica solta da internet","Sem contexto, ela não serve para você."] },
+  { s:"A culpa aparece depois de cada refeição.", x:"Comida não é castigo.", m:["Para cuidar da alimentação é preciso cortar o que gosta.","MITO","As comidas de que você gosta entram no plano."], p:["Coma com atenção","Sentada, sem tela, sentindo o gosto."], e:["Se comparar com os outros","Cada corpo tem o seu tempo."] },
+  { s:"Você pula refeições para 'economizar'.", x:"E chega com fome na próxima.", m:["Ter horário para comer ajuda a controlar a fome.","VERDADE","A rotina organiza o apetite."], p:["Organize a semana no domingo","Compras, marmitas e horários."], e:["Ficar horas sem comer","A fome acumulada vira exagero."] },
+]};
+const FORMATO = {
+  lista:  { chip:"Você Mais Magra", fim:["Se você se viu aqui, o problema não é força de vontade.","É método. Me chama no WhatsApp."], leg:"Qual desses você reconheceu? 👀 Salva para lembrar e manda para aquela amiga que vive recomeçando na segunda." },
+  mito:   { chip:"Mito ou verdade", fim:["Chega de regra que ninguém consegue seguir.","Me chama no WhatsApp e a gente ajusta a sua."], leg:"Você acertou quantas? Comenta aqui 👇 e salva para mostrar para quem ainda acredita nisso." },
+  passos: { chip:"Passo a passo", fim:["Pequenos ajustes, toda semana, sem sofrimento.","Esse é o Você Mais Magra. Me chama no WhatsApp."], leg:"Salva para colocar em prática esta semana ✅ e me conta qual passo você vai começar." },
+  erros:  { chip:"Erros comuns", fim:["Errar faz parte. Recomeçar do zero, não precisa.","Me chama no WhatsApp e a gente ajusta junto."], leg:"Qual desses erros você já cometeu? Sem julgamento 🤍 Salva e manda para uma amiga." },
+};
+
+const $ = s => document.querySelector(s);
+const guardar = (k, v) => { try { localStorage.setItem(k, JSON.stringify(v)); } catch(e){} };
+const ler = (k, d) => { try { const v = localStorage.getItem(k); return v ? JSON.parse(v) : d; } catch(e){ return d; } };
+const embaralhar = a => { a = [...a]; for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
+const esc = t => t.replace(/[&<>"]/g, c => ({ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;" }[c]));
+let temaAtual = 0, formato = "lista", legendaAtual = "", ultimas = [];
+
+// limite mensal (por aparelho, nesta prévia)
+const chaveMes = () => { const d = new Date(); return `carrossel-uso-${d.getFullYear()}-${d.getMonth() + 1}`; };
+const usados = () => ler(chaveMes(), 0);
+function mostrarUso(){
+  const u = usados();
+  $("#usados").textContent = u; $("#limite").textContent = LIMITE;
+  $("#barra").style.width = Math.min(100, u / LIMITE * 100) + "%";
+  const acabou = u >= LIMITE;
+  $("#gerar").disabled = acabou;
+  $("#gerar").innerHTML = acabou ? "Limite do mês atingido" : 'Gerar carrossel <span aria-hidden="true">→</span>';
+  if (acabou) $("#status").textContent = "Você usou os " + LIMITE + " carrosséis deste mês. Renova no dia 1º.";
+}
+
+TEMAS.forEach((t, i) => {
+  const b = document.createElement("button"); b.className = "tema"; b.setAttribute("aria-pressed", i === 0);
   b.innerHTML = `<div class="sw"><i style="background:${t.v["--c-capa"]}"></i><i style="background:${t.v["--c-fundo"]}"></i><i style="background:${t.v["--c-acento"]}"></i><i style="background:${t.v["--c-escuro"]}"></i></div>${t.nome}`;
-  b.onclick = () => { temaAtual=i; document.querySelectorAll(".tema").forEach((x,j)=>x.setAttribute("aria-pressed", j===i)); aplicarTema(); };
+  b.onclick = () => { temaAtual = i; document.querySelectorAll(".tema").forEach((x, j) => x.setAttribute("aria-pressed", j === i)); aplicarTema(); };
   $("#temas").appendChild(b);
 });
 document.querySelectorAll("#formatos button").forEach(b => b.onclick = () => {
-  document.querySelectorAll("#formatos button").forEach(x => x.setAttribute("aria-pressed", x===b));
-  if (b.dataset.f==="mito") $("#tema").value = "Mito ou verdade: comer à noite engorda?";
+  formato = b.dataset.f;
+  document.querySelectorAll("#formatos button").forEach(x => x.setAttribute("aria-pressed", x === b));
 });
 function aplicarTema(){ const v = TEMAS[temaAtual].v; for (const k in v) document.documentElement.style.setProperty(k, v[k]); }
 
-function escolher(texto){
-  const t = texto.trim().toLowerCase();
-  return Object.keys(CONTEUDO).find(k => k.toLowerCase() === t)
-      || Object.keys(CONTEUDO).find(k => t && k.toLowerCase().split(" ").filter(w=>w.length>4).some(w => t.includes(w)))
-      || Object.keys(CONTEUDO)[0];
+function assunto(texto){
+  const t = texto.toLowerCase();
+  let melhor = null, pontos = 0;
+  for (const a of ASSUNTOS) { const p = a.kw.filter(k => t.includes(k)).length; if (p > pontos) { pontos = p; melhor = a; } }
+  return melhor || GERAL;
 }
-function render(c, tituloLivre){
+// 3 fotos diferentes entre si e das últimas usadas
+function fotosPara(tags){
+  const recentes = ler("carrossel-fotos-recentes", []);
+  const doTema = embaralhar(FOTOS.filter(f => tags.includes(f.tag)));
+  const resto = embaralhar(FOTOS.filter(f => !tags.includes(f.tag)));
+  const ordem = [...doTema.filter(f => !recentes.includes(f.src)), ...resto.filter(f => !recentes.includes(f.src)), ...doTema, ...resto];
+  const escolhidas = [];
+  for (const f of ordem) { if (!escolhidas.includes(f.src)) escolhidas.push(f.src); if (escolhidas.length === 3) break; }
+  guardar("carrossel-fotos-recentes", [...escolhidas, ...recentes].slice(0, 15));
+  return escolhidas;
+}
+function tituloCapa(texto){
+  let t = texto.trim().replace(/\s+/g, " ").replace(/[.]+$/, "");
+  t = t.charAt(0).toUpperCase() + t.slice(1);
+  if (formato === "mito" && !/mito|verdade/i.test(t)) t = "Mito ou verdade: " + t.charAt(0).toLowerCase() + t.slice(1);
+  return t;
+}
+
+function render(titulo, ideias, fotos){
+  const F = FORMATO[formato];
   const pe = n => `<div class="pe"><span>Marília Souza · nutri</span><span>${n}/5</span></div>`;
-  const [i1,i2,i3] = c.itens; const [f1,f2,f3] = c.fotos;
-  const sub = x => x ? `<div class="s">${x}</div>` : "";
+  const sub = x => x ? `<div class="s">${esc(x)}</div>` : "";
+  const item = (id, i) => {
+    if (formato === "mito") return { selo:`<span class="selo ${id.m[1] === "MITO" ? "" : "verdade"}">${id.m[1]}</span>`, t:id.m[0], s:id.m[2] };
+    if (formato === "passos") return { selo:`<span class="selo passo">Passo ${i}</span>`, t:id.p[0], s:id.p[1] };
+    if (formato === "erros") return { selo:`<span class="selo erro">✕ Erro ${i}</span>`, t:id.e[0], s:id.e[1] };
+    return { selo:"", t:id.s, s:id.x };
+  };
+  const [a, b, c] = ideias.map((id, i) => item(id, i + 1));
+  const longo = titulo.length > 60 ? " longo" : "";
   return [
-    `<div class="card k-capa"><span class="big">3</span><div class="corpo"><span class="chip">Você Mais Magra</span><div class="t">${tituloLivre || c.capa}</div></div><img src="img/ma-recorte.webp" alt=""><div class="pe"><span>arrasta →</span></div></div>`,
-    `<div class="card k-a"><div class="corpo"><div class="n">1</div><div class="t">${i1[0]}</div>${sub(i1[1])}</div><div class="circ"><img src="${f1}" alt=""></div>${pe(2)}</div>`,
-    `<div class="card k-foto"><img src="${f2}" alt=""><div class="corpo"><div class="n">Parte 2</div><div class="t">${i2[0]}</div>${sub(i2[1])}</div>${pe(3)}</div>`,
-    `<div class="card k-b"><div class="arcof"><img src="${f3}" alt=""></div><div class="corpo"><div class="n">3 —</div><div class="t">${i3[0]}</div>${sub(i3[1])}</div>${pe(4)}</div>`,
-    `<div class="card k-fim"><div class="corpo"><div class="aspas">“</div><div class="t">${c.fim[0]}</div><div class="s">${c.fim[1]}</div><span class="cta">Chamar no WhatsApp</span></div><img src="img/ma-rindo-recorte.webp" alt=""><div class="pe"><span>Marília Souza · nutri</span></div></div>`
+    `<div class="card k-capa"><span class="big">3</span><div class="corpo"><span class="chip">${F.chip}</span><div class="t${longo}">${esc(titulo)}</div></div><img src="img/ma-recorte.webp" alt=""><div class="pe"><span>arrasta →</span></div></div>`,
+    `<div class="card k-a"><div class="corpo"><div class="n">1</div>${a.selo}<div class="t">${esc(a.t)}</div>${sub(a.s)}</div><div class="circ"><img src="${fotos[0]}" alt=""></div>${pe(2)}</div>`,
+    `<div class="card k-foto"><img src="${fotos[1]}" alt=""><div class="corpo"><div class="n">02</div>${b.selo}<div class="t">${esc(b.t)}</div>${sub(b.s)}</div>${pe(3)}</div>`,
+    `<div class="card k-b"><div class="arcof"><img src="${fotos[2]}" alt=""></div><div class="corpo"><div class="n">3 —</div>${c.selo}<div class="t">${esc(c.t)}</div>${sub(c.s)}</div>${pe(4)}</div>`,
+    `<div class="card k-fim"><div class="corpo"><div class="aspas">“</div><div class="t">${F.fim[0]}</div><div class="s">${F.fim[1]}</div><span class="cta">Chamar no WhatsApp</span></div><img src="img/ma-rindo-recorte.webp" alt=""><div class="pe"><span>Marília Souza · nutri</span></div></div>`
   ].join("");
 }
-const ETAPAS = ["lendo o seu método…","escrevendo os textos…","escolhendo as fotos…","aplicando as suas cores…","pronto ✓"];
-let legendaAtual = "";
+
+function vazio(){
+  $("#trilho").innerHTML = [1,2,3,4,5].map(n => `<div class="vazio">${n}/5</div>`).join("");
+}
+
+const ETAPAS = ["lendo o seu tema…","escrevendo os textos…","escolhendo as fotos…","aplicando as suas cores…"];
 async function gerar(){
+  const texto = $("#tema").value.trim();
+  if (!texto) { $("#tema").classList.remove("erro"); void $("#tema").offsetWidth; $("#tema").classList.add("erro"); $("#tema").focus(); $("#status").textContent = "Escreva sobre o que é o post."; return; }
+  if (usados() >= LIMITE) { mostrarUso(); return; }
   const btn = $("#gerar"); btn.disabled = true;
-  const texto = $("#tema").value; const chave = escolher(texto); const c = CONTEUDO[chave];
-  const livre = texto.trim() && texto.trim().toLowerCase() !== chave.toLowerCase() ? texto.trim() : null;
+  const A = assunto(texto);
+  // evita repetir as mesmas ideias do último carrossel do mesmo assunto
+  let ideias = embaralhar(A.ideias).filter(id => !ultimas.includes(id.s));
+  if (ideias.length < 3) ideias = embaralhar(A.ideias);
+  ideias = ideias.slice(0, 3); ultimas = ideias.map(i => i.s);
+  const titulo = tituloCapa(texto);
   $("#trilho").innerHTML = Array(5).fill('<div class="esq"></div>').join("");
-  for (let i=0;i<ETAPAS.length-1;i++){ $("#status").textContent = ETAPAS[i]; await new Promise(r=>setTimeout(r,520)); }
-  $("#trilho").innerHTML = render(c, livre);
-  $("#titulo").textContent = livre || c.capa;
-  legendaAtual = c.legenda;
-  $("#status").textContent = ETAPAS.at(-1) + "  ·  legenda: " + c.legenda;
-  document.querySelectorAll(".card").forEach((el,i) => setTimeout(()=>el.classList.add("on"), 90*i));
-  btn.disabled = false;
+  for (const e of ETAPAS) { $("#status").textContent = e; await new Promise(r => setTimeout(r, 450)); }
+  $("#trilho").innerHTML = render(titulo, ideias, fotosPara(A.fotos));
+  $("#titulo").textContent = titulo;
+  $("#subtitulo").textContent = "Gostou? Copie a legenda e baixe as telas. Quer outra versão? É só gerar de novo.";
+  legendaAtual = titulo + "\n\n" + FORMATO[formato].leg;
+  guardar(chaveMes(), usados() + 1);
+  $("#status").textContent = "pronto ✓  ·  legenda: " + FORMATO[formato].leg;
+  document.querySelectorAll(".card").forEach((el, i) => setTimeout(() => el.classList.add("on"), 90 * i));
+  $("#copiar").disabled = false; $("#baixar").disabled = false;
+  btn.disabled = false; mostrarUso();
 }
 $("#gerar").onclick = gerar;
-$("#copiar").onclick = async () => { try{ await navigator.clipboard.writeText(legendaAtual); $("#copiar").textContent="Copiada ✓"; }catch(e){ $("#copiar").textContent="Copiar legenda"; } };
+$("#tema").addEventListener("keydown", e => { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); gerar(); } });
+$("#tema").addEventListener("input", () => $("#tema").classList.remove("erro"));
+$("#copiar").onclick = async () => { try { await navigator.clipboard.writeText(legendaAtual); $("#copiar").textContent = "Copiada ✓"; setTimeout(() => $("#copiar").textContent = "Copiar legenda", 1800); } catch(e) {} };
 $("#baixar").onclick = () => { $("#status").textContent = "Na versão da assinatura, as 5 telas baixam em PNG 1080×1350, prontas para postar."; };
-if (location.hash==="#png"){ document.documentElement.dataset.theme="light"; document.body.classList.add("png"); }
-if (location.hash==="#png2"){ document.documentElement.dataset.theme="light"; document.body.classList.add("png","png2"); }
-aplicarTema(); gerar();
+aplicarTema(); vazio(); mostrarUso();
 </script>
 </body>
 </html>
