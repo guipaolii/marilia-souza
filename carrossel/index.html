@@ -1,0 +1,276 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta name="robots" content="noindex, nofollow">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Carrossel da Má</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Young+Serif&family=Figtree:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f3f1ec; --painel:#fffefb; --tinta:#1b211d; --tinta-2:#5f6862; --linha:#e2e0d8;
+  --batom:#b4374e; --azeitona:#2c3a2f; --rose:#f2d9db; --porcelana:#eef0ec; --salvia:#d3dccf;
+  /* tema do carrossel */
+  --c-fundo:#fafbf8; --c-tinta:#1e2620; --c-acento:#b4374e; --c-capa:#f2d9db; --c-escuro:#2c3a2f;
+}
+:root[data-theme="dark"]{ --bg:#141815; --painel:#1c211e; --tinta:#eef0ec; --tinta-2:#a3aca5; --linha:#2d3530 }
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){ --bg:#141815; --painel:#1c211e; --tinta:#eef0ec; --tinta-2:#a3aca5; --linha:#2d3530 } }
+*{ box-sizing:border-box; margin:0; padding:0 }
+body{ background:var(--bg); color:var(--tinta); font-family:"Figtree",system-ui,sans-serif; min-height:100vh }
+button{ font:inherit; cursor:pointer }
+
+.topo{ display:flex; align-items:center; justify-content:space-between; padding:18px 32px; border-bottom:1px solid var(--linha) }
+.logo{ display:flex; align-items:center; gap:12px; font-weight:700; letter-spacing:-.01em }
+.logo .m{ width:34px; height:34px; border-radius:10px; background:var(--batom); color:#fff; display:grid; place-items:center; font-family:"Young Serif",serif; font-size:18px }
+.logo small{ font-weight:500; color:var(--tinta-2); margin-left:4px }
+.chip-plano{ font-family:"JetBrains Mono",monospace; font-size:12px; padding:7px 12px; border:1px solid var(--linha); border-radius:99px; color:var(--tinta-2) }
+.chip-plano b{ color:var(--batom) }
+
+.app{ display:grid; grid-template-columns:380px 1fr; min-height:calc(100vh - 71px) }
+.lado{ border-right:1px solid var(--linha); padding:30px 28px; display:flex; flex-direction:column; gap:28px; background:var(--painel) }
+.rot{ font-size:12px; letter-spacing:.14em; text-transform:uppercase; color:var(--tinta-2); font-weight:600; margin-bottom:12px }
+textarea{ width:100%; min-height:96px; resize:none; border:1px solid var(--linha); border-radius:14px; padding:14px 16px; font:500 17px/1.4 "Figtree",sans-serif; background:var(--bg); color:var(--tinta); outline:none }
+textarea:focus{ border-color:var(--batom) }
+.sug{ display:flex; flex-wrap:wrap; gap:8px; margin-top:12px }
+.sug button{ border:1px solid var(--linha); background:transparent; color:var(--tinta); border-radius:99px; padding:8px 13px; font-size:14px; transition:.2s }
+.sug button:hover{ border-color:var(--batom); color:var(--batom) }
+.temas{ display:grid; grid-template-columns:repeat(3,1fr); gap:10px }
+.tema{ border:1.5px solid var(--linha); border-radius:14px; padding:10px; background:transparent; color:var(--tinta); text-align:left; font-size:13px; font-weight:600 }
+.tema .sw{ display:flex; height:30px; border-radius:8px; overflow:hidden; margin-bottom:8px }
+.tema .sw i{ flex:1 }
+.tema[aria-pressed="true"]{ border-color:var(--batom); box-shadow:0 0 0 3px color-mix(in srgb, var(--batom) 18%, transparent) }
+.formatos{ display:flex; gap:8px }
+.formatos button{ flex:1; border:1.5px solid var(--linha); background:transparent; color:var(--tinta); border-radius:12px; padding:10px; font-size:14px; font-weight:600 }
+.formatos button[aria-pressed="true"]{ border-color:var(--tinta); background:var(--tinta); color:var(--painel) }
+.gerar{ margin-top:auto; border:0; background:var(--batom); color:#fff; font-weight:700; font-size:17px; padding:18px; border-radius:16px; display:flex; align-items:center; justify-content:center; gap:10px; transition:transform .15s, filter .2s }
+.gerar:hover{ filter:brightness(1.07) } .gerar:active{ transform:scale(.98) }
+.gerar[disabled]{ filter:grayscale(.4) opacity(.8); cursor:wait }
+
+.palco{ padding:36px 40px; display:flex; flex-direction:column; gap:22px; overflow:hidden }
+.cab{ display:flex; align-items:flex-end; justify-content:space-between; gap:20px; flex-wrap:wrap }
+.cab h1{ font-family:"Young Serif",serif; font-weight:400; font-size:clamp(26px,3vw,40px); line-height:1.1; max-width:720px }
+.cab p{ color:var(--tinta-2); margin-top:6px }
+.status{ font-family:"JetBrains Mono",monospace; font-size:13px; color:var(--tinta-2); min-height:20px }
+.acoes{ display:flex; gap:10px }
+.acoes button{ border:1px solid var(--linha); background:var(--painel); color:var(--tinta); border-radius:12px; padding:11px 16px; font-weight:600; font-size:14px }
+
+.trilho{ display:grid; grid-auto-flow:column; grid-auto-columns:max(200px, calc((100% - 72px) / 5)); gap:18px; overflow-x:auto; padding:6px 2px 18px; scroll-snap-type:x mandatory }
+.card{ scroll-snap-align:start; aspect-ratio:4/5; border-radius:18px; position:relative; overflow:hidden; background:var(--c-fundo); color:var(--c-tinta); container-type:inline-size; display:flex; flex-direction:column; box-shadow:0 1px 0 rgba(0,0,0,.04), 0 24px 40px -30px rgba(20,30,22,.55);
+  opacity:0; transform:translateY(24px) scale(.97); transition:opacity .6s cubic-bezier(.2,.8,.2,1), transform .7s cubic-bezier(.2,.8,.2,1) }
+.card.on{ opacity:1; transform:none }
+.card .corpo{ padding:7cqw 8cqw 0; display:flex; flex-direction:column; gap:3cqw; position:relative; z-index:2 }
+.card .n{ font-family:"Young Serif",serif; font-size:13cqw; line-height:.9; color:var(--c-acento) }
+.card .t{ font-family:"Young Serif",serif; font-size:8cqw; line-height:1.12; letter-spacing:-.01em; text-wrap:balance }
+.card .s{ font-size:5cqw; line-height:1.38; opacity:.8; text-wrap:pretty }
+.card .pe{ margin-top:auto; padding:0 8cqw 6cqw; font-size:3.8cqw; letter-spacing:.08em; text-transform:uppercase; display:flex; justify-content:space-between; opacity:.7; position:relative; z-index:2 }
+.card .chip{ align-self:flex-start; font-size:3.8cqw; font-weight:700; letter-spacing:.14em; text-transform:uppercase; padding:1.8cqw 3.6cqw; border-radius:99px; background:var(--c-acento); color:#fff }
+/* 1 capa: bloco batom, numeral gigante vazado atrás, recorte dela */
+.k-capa{ background:var(--c-acento); color:#fff }
+.k-capa .big{ position:absolute; right:-8cqw; top:44cqw; font-family:"Young Serif",serif; font-size:84cqw; line-height:.8; color:transparent; -webkit-text-stroke:.5cqw rgba(255,255,255,.35); z-index:0 }
+.k-capa .chip{ background:#fff; color:var(--c-acento) }
+.k-capa .t{ font-size:9.4cqw; color:#fff; max-width:92% }
+.k-capa img{ position:absolute; left:-2cqw; bottom:0; height:52%; z-index:1; filter:drop-shadow(0 4cqw 6cqw rgba(0,0,0,.25)) }
+.k-capa .pe{ justify-content:flex-end; opacity:1 }
+.k-capa .pe span{ background:#fff; color:var(--c-acento); font-weight:700; padding:2cqw 4cqw; border-radius:99px; letter-spacing:.04em }
+/* 2 item claro: numeral grande + foto em círculo */
+.k-a{ background:var(--c-fundo) }
+.k-a .n{ font-size:30cqw; line-height:.8; color:transparent; -webkit-text-stroke:.45cqw var(--c-acento) }
+.k-a .circ{ position:absolute; right:-8cqw; bottom:-8cqw; width:52cqw; height:52cqw; border-radius:50%; overflow:hidden; border:2cqw solid var(--c-capa) }
+.k-a .circ img{ width:100%; height:100%; object-fit:cover }
+.k-a .corpo{ max-width:100% }
+.k-a .s{ max-width:56% }
+.k-a .pe span:last-child{ display:none }
+/* 3 foto inteira */
+.k-foto{ color:#fff }
+.k-foto > img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover }
+.k-foto::after{ content:""; position:absolute; inset:0; background:linear-gradient(180deg, rgba(15,20,17,.1) 0%, rgba(15,20,17,0) 30%, rgba(15,20,17,.82) 78%); z-index:1 }
+.k-foto .corpo{ margin-top:auto; padding-bottom:4cqw }
+.k-foto .n{ color:#fff; font-size:5cqw; letter-spacing:.14em; font-family:"Figtree",sans-serif; font-weight:700; text-transform:uppercase }
+.k-foto .t{ font-size:9cqw }
+.k-foto .pe{ margin-top:0; opacity:.85 }
+/* 4 item sálvia: foto em arco no topo */
+.k-b{ background:var(--c-capa) }
+.k-b .arcof{ height:46%; flex:none; margin:6cqw 8cqw 0; border-radius:40cqw 40cqw 4cqw 4cqw; overflow:hidden }
+.k-b .arcof img{ width:100%; height:100%; object-fit:cover; display:block }
+.k-b .corpo{ padding-top:5cqw; gap:2cqw }
+.k-b .n{ font-size:7cqw }
+.k-b .t{ font-size:7.6cqw }
+.k-b .s{ font-size:4.8cqw }
+/* 5 fim escuro: aspas gigantes + recorte + CTA */
+.k-fim{ background:var(--c-escuro); color:#f4f5f1 }
+.k-fim .aspas{ font-family:"Young Serif",serif; font-size:30cqw; line-height:1; color:var(--c-acento); height:14cqw; margin-top:2cqw }
+.k-fim .t{ font-size:8.6cqw; max-width:100% }
+.k-fim .s{ max-width:58% }
+.k-fim .cta{ align-self:flex-start; background:var(--c-acento); color:#fff; font-weight:700; font-size:4.4cqw; padding:3cqw 5cqw; border-radius:99px; margin-top:1cqw }
+.k-fim img{ position:absolute; right:-6cqw; bottom:0; height:42%; z-index:1 }
+.k-fim .pe{ color:#f3b6c1; opacity:1 }
+.esq{ aspect-ratio:4/5; border-radius:18px; background:linear-gradient(100deg, var(--linha) 30%, color-mix(in srgb, var(--linha) 40%, var(--painel)) 50%, var(--linha) 70%) 0 0/300% 100%; animation:brilho 1.2s linear infinite }
+@keyframes brilho{ to{ background-position:-150% 0 } }
+
+.rodape{ display:flex; gap:28px; flex-wrap:wrap; color:var(--tinta-2); font-size:14px; border-top:1px solid var(--linha); padding-top:18px }
+.rodape b{ color:var(--tinta) }
+
+@media (max-width:900px){
+  .app{ grid-template-columns:1fr } .lado{ border-right:0; border-bottom:1px solid var(--linha); padding:22px 16px }
+  .palco{ padding:22px 16px } .topo{ padding:14px 16px } .chip-plano{ display:none }
+  .trilho{ grid-auto-columns:78% }
+}
+@media (prefers-reduced-motion:reduce){ .card{ transition:none } .esq{ animation:none } }
+body.png .topo, body.png .lado, body.png .cab, body.png .status, body.png .rodape{ display:none }
+body.png .app{ display:block; min-height:0 } body.png .palco{ padding:40px; background:#eef0ec }
+body.png .trilho{ overflow:visible; grid-auto-columns:1fr }
+body.png2 .trilho{ grid-auto-flow:row; grid-template-columns:repeat(6,1fr); gap:28px; width:1000px; padding:0 }
+body.png2 .card{ grid-column:span 2 } body.png2 .card:nth-child(4){ grid-column:2 / span 2 }
+body.png2 .palco{ background:transparent; padding:20px }
+</style>
+</head>
+<body>
+<header class="topo">
+  <div class="logo"><span class="m">M</span>Carrossel da Má <small>por AlgUp</small></div>
+  <span class="chip-plano">assinatura · <b>R$ 29,90</b>/mês</span>
+</header>
+
+<main class="app">
+  <aside class="lado">
+    <div>
+      <div class="rot">Sobre o que é o post?</div>
+      <textarea id="tema">3 sinais de que sua relação com a comida está te sabotando</textarea>
+      <div class="sug" id="sug"></div>
+    </div>
+    <div>
+      <div class="rot">Cores</div>
+      <div class="temas" id="temas"></div>
+    </div>
+    <div>
+      <div class="rot">Formato</div>
+      <div class="formatos" id="formatos">
+        <button aria-pressed="true" data-f="lista">Lista</button>
+        <button aria-pressed="false" data-f="mito">Mito ou verdade</button>
+      </div>
+    </div>
+    <button class="gerar" id="gerar">Gerar carrossel <span aria-hidden="true">→</span></button>
+  </aside>
+
+  <section class="palco">
+    <div class="cab">
+      <div>
+        <h1 id="titulo">Escreva o tema, escolha as cores. O carrossel sai pronto.</h1>
+        <p>Com as suas fotos, o seu método e as regras do CFN.</p>
+      </div>
+      <div class="acoes"><button id="copiar">Copiar legenda</button><button id="baixar">Baixar as 5 telas</button></div>
+    </div>
+    <div class="status" id="status"></div>
+    <div class="trilho" id="trilho"></div>
+    <div class="rodape">
+      <span><b>Ilimitado</b> carrosséis por mês</span>
+      <span><b>Legenda</b> do post pronta</span>
+      <span><b>Suas fotos</b> já recortadas</span>
+      <span><b>Pronto em</b> menos de 1 minuto</span>
+    </div>
+  </section>
+</main>
+
+<script>
+const IMG = { capa:"img/ma-recorte.webp", capa2:"img/ma-rindo-recorte.webp" };
+const TEMAS = [
+  { nome:"Porcelana", v:{ "--c-fundo":"#fafbf8","--c-tinta":"#1e2620","--c-acento":"#b4374e","--c-capa":"#f2d9db","--c-escuro":"#2c3a2f" } },
+  { nome:"Batom", v:{ "--c-fundo":"#fbf3f1","--c-tinta":"#3a1820","--c-acento":"#b4374e","--c-capa":"#e9b9c1","--c-escuro":"#7d2335" } },
+  { nome:"Sálvia", v:{ "--c-fundo":"#f1f4ee","--c-tinta":"#1f2a22","--c-acento":"#4f6b52","--c-capa":"#d3dccf","--c-escuro":"#24302a" } },
+];
+const CONTEUDO = {
+  "3 sinais de que sua relação com a comida está te sabotando": {
+    capa:"3 sinais de que sua relação com a comida está te sabotando", fotos:["img/n1.jpg","img/n6.jpg","img/n5.jpg"],
+    itens:[["Você come rápido, em pé, sem sentir o gosto.","A fome passa. A vontade continua."],
+           ["Na segunda, você “compensa” o fim de semana.",""],
+           ["O doce virou prêmio. E depois, culpa.","Comida não é recompensa nem castigo."]],
+    fim:["Se você se viu aqui, o problema não é força de vontade.","É método. Me chama no WhatsApp."],
+    legenda:"Qual desses sinais você reconheceu? 👀 Salva para lembrar e manda para aquela amiga que vive recomeçando a dieta na segunda."
+  },
+  "Por que dieta restritiva faz você voltar a engordar": {
+    capa:"Por que a dieta restritiva faz você voltar a engordar", fotos:["img/n4.jpg","img/n2.jpg","img/n7.jpg"],
+    itens:[["Cortar tudo deixa a fome no comando.","E fome no comando sempre vence."],
+           ["O corpo se adapta. A cabeça cansa.",""],
+           ["Quando a dieta acaba, o hábito antigo volta.","Porque nada foi construído no lugar."]],
+    fim:["Emagrecer de verdade é aprender a comer, não parar de comer.","Quer entender como? Me chama no WhatsApp."],
+    legenda:"Já passou pelo efeito sanfona? Eu passei. Comenta “EU” que eu te conto o que mudou."
+  },
+  "O que eu faria no seu prato hoje, sem cortar nada": {
+    capa:"O que eu faria no seu prato hoje, sem cortar nada", fotos:["img/n3.jpg","img/n7.jpg","img/n5.jpg"],
+    itens:[["Metade do prato colorido.","Salada, legumes, o que tiver aí."],
+           ["O arroz e o feijão ficam.",""],
+           ["Mude a ordem: comece pela salada.","Você chega no resto com menos pressa."]],
+    fim:["Pequenos ajustes, toda semana, sem sofrimento.","Esse é o Você Mais Magra. Me chama no WhatsApp."],
+    legenda:"Salva para o almoço de hoje 🍽️ e me conta: qual desses você já faz?"
+  },
+  "Mito ou verdade: comer à noite engorda?": {
+    capa:"Mito ou verdade: comer à noite engorda?", fotos:["img/n8.jpg","img/n6.jpg","img/n2.jpg"],
+    itens:[["Mito. O horário pesa menos que o total do dia.",""],
+           ["O problema é chegar à noite com fome de leão.",""],
+           ["Jantar leve e cedo ajuda no sono, não é regra.","Cada rotina pede um ajuste."]],
+    fim:["Chega de regra que ninguém consegue seguir.","Me chama no WhatsApp e a gente ajusta a sua."],
+    legenda:"Você janta tarde? Sem culpa. Salva esse post e manda para quem precisa ouvir isso."
+  }
+};
+const $ = s => document.querySelector(s);
+let temaAtual = 0;
+
+// sugestões e temas
+Object.keys(CONTEUDO).forEach(k => {
+  const b = document.createElement("button"); b.textContent = k.length > 34 ? k.slice(0,32)+"…" : k;
+  b.onclick = () => { $("#tema").value = k; gerar(); }; $("#sug").appendChild(b);
+});
+TEMAS.forEach((t,i) => {
+  const b = document.createElement("button"); b.className="tema"; b.setAttribute("aria-pressed", i===0);
+  b.innerHTML = `<div class="sw"><i style="background:${t.v["--c-capa"]}"></i><i style="background:${t.v["--c-fundo"]}"></i><i style="background:${t.v["--c-acento"]}"></i><i style="background:${t.v["--c-escuro"]}"></i></div>${t.nome}`;
+  b.onclick = () => { temaAtual=i; document.querySelectorAll(".tema").forEach((x,j)=>x.setAttribute("aria-pressed", j===i)); aplicarTema(); };
+  $("#temas").appendChild(b);
+});
+document.querySelectorAll("#formatos button").forEach(b => b.onclick = () => {
+  document.querySelectorAll("#formatos button").forEach(x => x.setAttribute("aria-pressed", x===b));
+  if (b.dataset.f==="mito") $("#tema").value = "Mito ou verdade: comer à noite engorda?";
+});
+function aplicarTema(){ const v = TEMAS[temaAtual].v; for (const k in v) document.documentElement.style.setProperty(k, v[k]); }
+
+function escolher(texto){
+  const t = texto.trim().toLowerCase();
+  return Object.keys(CONTEUDO).find(k => k.toLowerCase() === t)
+      || Object.keys(CONTEUDO).find(k => t && k.toLowerCase().split(" ").filter(w=>w.length>4).some(w => t.includes(w)))
+      || Object.keys(CONTEUDO)[0];
+}
+function render(c, tituloLivre){
+  const pe = n => `<div class="pe"><span>Marília Souza · nutri</span><span>${n}/5</span></div>`;
+  const [i1,i2,i3] = c.itens; const [f1,f2,f3] = c.fotos;
+  const sub = x => x ? `<div class="s">${x}</div>` : "";
+  return [
+    `<div class="card k-capa"><span class="big">3</span><div class="corpo"><span class="chip">Você Mais Magra</span><div class="t">${tituloLivre || c.capa}</div></div><img src="img/ma-recorte.webp" alt=""><div class="pe"><span>arrasta →</span></div></div>`,
+    `<div class="card k-a"><div class="corpo"><div class="n">1</div><div class="t">${i1[0]}</div>${sub(i1[1])}</div><div class="circ"><img src="${f1}" alt=""></div>${pe(2)}</div>`,
+    `<div class="card k-foto"><img src="${f2}" alt=""><div class="corpo"><div class="n">Parte 2</div><div class="t">${i2[0]}</div>${sub(i2[1])}</div>${pe(3)}</div>`,
+    `<div class="card k-b"><div class="arcof"><img src="${f3}" alt=""></div><div class="corpo"><div class="n">3 —</div><div class="t">${i3[0]}</div>${sub(i3[1])}</div>${pe(4)}</div>`,
+    `<div class="card k-fim"><div class="corpo"><div class="aspas">“</div><div class="t">${c.fim[0]}</div><div class="s">${c.fim[1]}</div><span class="cta">Chamar no WhatsApp</span></div><img src="img/ma-rindo-recorte.webp" alt=""><div class="pe"><span>Marília Souza · nutri</span></div></div>`
+  ].join("");
+}
+const ETAPAS = ["lendo o seu método…","escrevendo os textos…","escolhendo as fotos…","aplicando as suas cores…","pronto ✓"];
+let legendaAtual = "";
+async function gerar(){
+  const btn = $("#gerar"); btn.disabled = true;
+  const texto = $("#tema").value; const chave = escolher(texto); const c = CONTEUDO[chave];
+  const livre = texto.trim() && texto.trim().toLowerCase() !== chave.toLowerCase() ? texto.trim() : null;
+  $("#trilho").innerHTML = Array(5).fill('<div class="esq"></div>').join("");
+  for (let i=0;i<ETAPAS.length-1;i++){ $("#status").textContent = ETAPAS[i]; await new Promise(r=>setTimeout(r,520)); }
+  $("#trilho").innerHTML = render(c, livre);
+  $("#titulo").textContent = livre || c.capa;
+  legendaAtual = c.legenda;
+  $("#status").textContent = ETAPAS.at(-1) + "  ·  legenda: " + c.legenda;
+  document.querySelectorAll(".card").forEach((el,i) => setTimeout(()=>el.classList.add("on"), 90*i));
+  btn.disabled = false;
+}
+$("#gerar").onclick = gerar;
+$("#copiar").onclick = async () => { try{ await navigator.clipboard.writeText(legendaAtual); $("#copiar").textContent="Copiada ✓"; }catch(e){ $("#copiar").textContent="Copiar legenda"; } };
+$("#baixar").onclick = () => { $("#status").textContent = "Na versão da assinatura, as 5 telas baixam em PNG 1080×1350, prontas para postar."; };
+if (location.hash==="#png"){ document.documentElement.dataset.theme="light"; document.body.classList.add("png"); }
+if (location.hash==="#png2"){ document.documentElement.dataset.theme="light"; document.body.classList.add("png","png2"); }
+aplicarTema(); gerar();
+</script>
+</body>
+</html>

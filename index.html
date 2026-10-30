@@ -1,0 +1,491 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta name="robots" content="noindex, nofollow">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<script>if(!/estatico/.test(location.search)&&!matchMedia("(prefers-reduced-motion: reduce)").matches){document.documentElement.classList.add("intro");setTimeout(()=>document.documentElement.classList.remove("intro"),4000)}</script>
+<title>Marília Souza — Nutricionista em Suzano</title>
+<meta name="description" content="Marília Souza, nutricionista em Suzano com foco em emagrecimento feminino. Método Você Mais Magra, com ajustes toda semana pelo WhatsApp.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Young+Serif&family=Figtree:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap">
+<style>
+  /* Linguagem: "orgânico suave" (site-nutri/references/estilos.md). Sem GSAP/Lenis: Motion + Embla. */
+  :root {
+    --fundo: #eef0ec; --papel: #fafbf8; --tinta: #1e2620; --tinta-2: #56605a; --linha: #d6dcd4;
+    --rose: #f2d9db; --salvia: #d3dccf; --batom: #b4374e; --azeitona: #2c3a2f;
+    --titulo: "Young Serif", Georgia, "Times New Roman", serif;
+    --texto: "Figtree", "Helvetica Neue", Arial, sans-serif;
+    --r-g: 36px; --r-m: 22px;
+    --t-hero: clamp(2.7rem, 6vw, 5.4rem);
+    --t-1: clamp(2.1rem, 4vw, 3.6rem);
+    --t-2: clamp(1.35rem, 2vw, 1.75rem);
+  }
+  *, *::before, *::after { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { margin: 0; background: var(--fundo); color: var(--tinta); font-family: var(--texto); font-size: 1.0625rem; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+  img { max-width: 100%; display: block; }
+  h1, h2, h3 { font-family: var(--titulo); font-weight: 400; line-height: 1.05; letter-spacing: -.01em; margin: 0; text-wrap: balance; }
+  p { margin: 0; }
+  a { color: inherit; }
+  .wrap { width: 100%; max-width: 1240px; margin-inline: auto; padding-left: max(20px, env(safe-area-inset-left, 0px)); padding-right: max(20px, env(safe-area-inset-right, 0px)); }
+    .pilula { display: inline-flex; align-items: center; gap: .5rem; font-size: .875rem; font-weight: 600; padding: .45rem .9rem; border-radius: 999px; background: var(--papel); border: 1px solid var(--linha); }
+  .pilula i { width: .5rem; height: .5rem; border-radius: 50%; background: var(--batom); }
+  .botao { display: inline-flex; align-items: center; gap: .6rem; min-height: 52px; padding: .9rem 1.5rem; border-radius: 999px; background: var(--tinta); color: var(--papel); font-weight: 600; text-decoration: none; transition: transform .35s cubic-bezier(.2,.9,.3,1.3), background .3s; }
+  .botao:hover { background: var(--batom); transform: translateY(-2px) scale(1.02); }
+  .botao svg { width: 1.15em; height: 1.15em; }
+  .botao-claro { background: var(--papel); color: var(--tinta); border: 1px solid var(--linha); }
+  .botao-claro:hover { background: var(--salvia); }
+  :focus-visible { outline: 3px solid var(--batom); outline-offset: 3px; border-radius: 8px; }
+  section { padding-block: clamp(4.5rem, 9vw, 7.5rem); }
+  .titulo-sec { display: grid; gap: 1rem; max-width: 40rem; margin-bottom: clamp(2.2rem, 4vw, 3.4rem); }
+  .titulo-sec h2 { font-size: var(--t-1); }
+  .titulo-sec p { color: var(--tinta-2); max-width: 34rem; }
+
+  /* NAV editorial: barra fina de ponta a ponta */
+  .nav { position: sticky; top: 0; z-index: 50; border-bottom: 1px solid transparent; transition: background .4s, border-color .4s; }
+  .nav.rolou { background: var(--fundo); border-bottom-color: var(--linha); }
+  .nav .wrap { display: flex; align-items: center; justify-content: space-between; gap: 2rem; min-height: 78px; transition: min-height .4s; }
+  .nav.rolou .wrap { min-height: 62px; }
+  .marca { display: grid; gap: .1rem; text-decoration: none; line-height: 1.05; }
+  .marca strong { font-family: var(--titulo); font-weight: 400; font-size: 1.45rem; letter-spacing: -.01em; }
+  .marca small { font-size: .6875rem; letter-spacing: .22em; text-transform: uppercase; color: var(--tinta-2); }
+  .nav-links { display: flex; gap: 2.4rem; margin-left: auto; }
+  .nav-links a, .nav-cta { position: relative; text-decoration: none; font-size: .75rem; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; padding-block: .4rem; }
+  .nav-links a::after, .nav-cta::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 1px; background: currentColor; transform: scaleX(0); transform-origin: right; transition: transform .45s cubic-bezier(.7,0,.2,1); }
+  .nav-links a:hover::after, .nav-cta:hover::after { transform: scaleX(1); transform-origin: left; }
+  .nav-cta { color: var(--batom); display: inline-flex; gap: .55rem; align-items: center; padding-left: 2.4rem; border-left: 1px solid var(--linha); }
+  .nav-cta::after { left: 2.4rem; transform: scaleX(1); opacity: .35; }
+  .nav-cta span { transition: transform .35s; } .nav-cta:hover span { transform: translateX(4px); }
+  .selo-previa { position: fixed; right: 16px; bottom: 16px; z-index: 55; font-size: .6875rem; letter-spacing: .08em; color: var(--tinta-2); background: var(--papel); border: 1px solid var(--linha); padding: .35rem .6rem; border-radius: 6px; }
+
+  /* faixa gigante que corre com a rolagem */
+  .faixa-gigante { padding-block: clamp(1rem, 3vw, 2.4rem); overflow: hidden; border-block: 1px solid var(--linha); }
+  .faixa-gigante p { white-space: nowrap; font-family: var(--titulo); font-size: clamp(3.4rem, 11vw, 9.5rem); line-height: 1; letter-spacing: -.02em; color: var(--tinta); will-change: transform; }
+  .faixa-gigante p i { font-style: normal; color: var(--batom); }
+  .faixa-gigante p b { font-weight: 400; color: transparent; -webkit-text-stroke: 1.5px var(--tinta); }
+
+  /* intro do hero */
+  .palavra { display: inline-block; overflow: hidden; vertical-align: top; padding-bottom: .08em; margin-bottom: -.08em; }
+  .palavra > span { display: inline-block; }
+  .hero h1 em { position: relative; display: inline-block; }
+  .rabisco { position: absolute; left: -8%; top: -12%; width: 116%; height: 128%; overflow: visible; pointer-events: none; }
+  .rabisco path { fill: none; stroke: var(--batom); stroke-width: 3.5px; stroke-linecap: round; vector-effect: non-scaling-stroke; }
+  html.intro .hero [data-sobe], html.intro .hero-arte > *, html.intro .palavra > span { opacity: 0; }
+  .circulo { transform-origin: 50% 100%; }
+
+  /* HERO */
+  .hero { padding-block: clamp(2.5rem, 6vw, 4.5rem) clamp(3rem, 6vw, 5rem); }
+  .hero .wrap { display: grid; grid-template-columns: 1.1fr 1fr; gap: clamp(2rem, 5vw, 5rem); align-items: center; }
+  .hero-texto { display: grid; gap: 1.6rem; justify-items: start; min-width: 0; }
+  .hero h1 { font-size: var(--t-hero); }
+  .hero h1 em { font-style: normal; color: var(--batom); }
+  .hero-apoio { font-size: 1.2rem; color: var(--tinta-2); max-width: 30rem; }
+  .hero-acoes { display: flex; flex-wrap: wrap; gap: .8rem; }
+  .hero-dados { display: flex; flex-wrap: wrap; gap: .5rem; }
+  .hero-arte { position: relative; aspect-ratio: 1 / 1.05; max-width: 560px; width: 100%; justify-self: center; }
+  .circulo { position: absolute; inset: 14% 2% 0 2%; border-radius: 50%; background: var(--rose); }
+  .hero-arte .ma { position: absolute; left: 50%; bottom: 0; width: 82%; transform: translateX(-50%);
+    -webkit-mask-image: linear-gradient(to bottom, #000 78%, transparent 99%); mask-image: linear-gradient(to bottom, #000 78%, transparent 99%); }
+  .bolha { position: absolute; border-radius: 50%; overflow: hidden; border: 6px solid var(--papel); box-shadow: 0 18px 40px -20px rgb(30 38 32 / .45); }
+  .bolha img { width: 100%; height: 100%; object-fit: cover; }
+  .bolha-1 { width: 26%; aspect-ratio: 1; left: -3%; top: 40%; }
+  .bolha-2 { width: 21%; aspect-ratio: 1; right: -2%; top: 22%; }
+  .selo { position: absolute; right: 4%; bottom: 6%; width: 27%; aspect-ratio: 1; border-radius: 50%; background: var(--tinta); color: var(--papel); display: grid; place-items: center; }
+  .selo svg { position: absolute; inset: 0; width: 100%; height: 100%; animation: girar 24s linear infinite; }
+  .selo text { font-family: var(--texto); font-size: 10.5px; font-weight: 600; letter-spacing: 2.2px; fill: currentColor; text-transform: uppercase; }
+  .selo span { font-family: var(--titulo); font-size: clamp(1.4rem, 2.6vw, 2.1rem); color: var(--rose); }
+  @keyframes girar { to { transform: rotate(360deg); } }
+  .flutua { animation: flutuar 7s ease-in-out infinite; }
+  .bolha-2.flutua { animation-delay: -3.5s; }
+  @keyframes flutuar { 50% { transform: translateY(-10px); } }
+
+  /* PARA QUEM: cards com check que se desenha */
+  .paraquem { padding-top: clamp(2rem, 4vw, 3rem); }
+  .cards { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1rem; }
+  .card { background: var(--papel); border-radius: var(--r-g); padding: 1.6rem 1.5rem 1.7rem; display: grid; gap: 1.1rem; align-content: start; border: 1px solid var(--linha); transition: transform .45s cubic-bezier(.2,.9,.3,1.2), background .4s; }
+  .card:nth-child(2) { background: var(--salvia); border-color: transparent; }
+  .card:nth-child(3) { background: var(--rose); border-color: transparent; }
+  .card:hover { transform: translateY(-6px) rotate(-.6deg); }
+  .check { width: 44px; height: 44px; }
+  .check circle { fill: none; stroke: var(--batom); stroke-width: 2; stroke-dasharray: 126; stroke-dashoffset: 0; }
+  .check path { fill: none; stroke: var(--tinta); stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 24; stroke-dashoffset: 0; }
+  .card h3 { font-size: var(--t-2); }
+  .card p { color: var(--tinta-2); font-size: 1rem; }
+
+  /* SEMANA: carrossel */
+  .semana { background: var(--azeitona); color: var(--fundo); border-radius: clamp(28px, 4vw, 56px); margin-inline: max(10px, 1.2vw); }
+  .semana .titulo-sec p { color: #b9c5bb; }
+  .semana-topo { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 1.5rem; margin-bottom: clamp(2rem, 4vw, 3rem); }
+  .semana-topo .titulo-sec { margin-bottom: 0; }
+  .semana h2 em { font-style: normal; color: var(--rose); }
+  .setas { display: flex; gap: .6rem; }
+  .seta { width: 52px; height: 52px; border-radius: 50%; border: 1px solid #4b5b4e; background: transparent; color: var(--fundo); cursor: pointer; display: grid; place-items: center; transition: background .3s; }
+  .seta:hover { background: var(--batom); border-color: var(--batom); }
+  .seta svg { width: 20px; height: 20px; }
+  .embla { overflow: hidden; padding-left: max(20px, calc((100vw - 1240px) / 2 + 20px)); }
+  .embla__trilho { display: flex; gap: 1rem; touch-action: pan-y pinch-zoom; }
+  .dia { flex: 0 0 min(320px, 78vw); background: #354538; border-radius: var(--r-g); padding: .7rem .7rem 1.5rem; display: grid; gap: 1rem; align-content: start; }
+  .dia:last-child { margin-right: max(20px, calc((100vw - 1240px) / 2 + 20px)); }
+  .dia-foto { aspect-ratio: 4 / 3.4; border-radius: calc(var(--r-g) - 10px); overflow: hidden; }
+  .dia-foto img { width: 100%; height: 100%; object-fit: cover; transition: transform 1.2s cubic-bezier(.2,.8,.2,1); }
+  .dia:hover .dia-foto img { transform: scale(1.06); }
+  .dia-corpo { display: grid; gap: .55rem; padding-inline: .8rem; }
+  .dia-nome { display: inline-flex; align-self: start; justify-self: start; gap: .4rem; align-items: center; font-size: .8125rem; font-weight: 700; letter-spacing: .02em; padding: .3rem .75rem; border-radius: 999px; background: var(--rose); color: var(--tinta); }
+  .dia h3 { font-size: 1.45rem; }
+  .dia p { color: #b9c5bb; font-size: .975rem; }
+  .pontos { display: flex; gap: .45rem; justify-content: center; margin-top: 1.8rem; }
+  .pontos button { width: 9px; height: 9px; padding: 0; border-radius: 999px; border: 0; background: #4f604f; cursor: pointer; transition: width .4s, background .4s; }
+  .pontos button.ativo { width: 28px; background: var(--rose); }
+
+  /* HISTÓRIA: foto em arco */
+  .historia .wrap { display: grid; grid-template-columns: .85fr 1.15fr; gap: clamp(2rem, 6vw, 6rem); align-items: center; }
+  .arco { position: relative; aspect-ratio: 4 / 5; border-radius: 999px 999px var(--r-g) var(--r-g); background: var(--salvia); overflow: hidden; max-width: 420px; width: 100%; justify-self: center; }
+  .arco img { position: absolute; left: 50%; bottom: 0; height: 94%; width: auto; max-width: none; transform: translateX(-50%); -webkit-mask-image: linear-gradient(to bottom, #000 82%, transparent 100%); mask-image: linear-gradient(to bottom, #000 82%, transparent 100%); }
+  .citacao { display: grid; gap: 1.6rem; }
+  .citacao blockquote { margin: 0; font-family: var(--titulo); font-size: clamp(1.6rem, 2.8vw, 2.4rem); line-height: 1.22; }
+  .citacao blockquote mark { background: linear-gradient(transparent 62%, var(--rose) 62%); color: inherit; padding-inline: .1em; }
+  .citacao p { color: var(--tinta-2); max-width: 34rem; }
+  .assina { font-weight: 700; }
+  .assina span { font-weight: 400; color: var(--tinta-2); }
+
+  /* COMO FUNCIONA */
+  .passos { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1rem; position: relative; }
+  .linha-passos { position: absolute; left: 6%; right: 6%; top: 32px; height: 2px; background: repeating-linear-gradient(90deg, var(--tinta) 0 8px, transparent 8px 16px); transform-origin: left; opacity: .35; }
+  .passo { position: relative; display: grid; gap: .9rem; align-content: start; }
+  .passo .num { width: 64px; height: 64px; border-radius: 50%; display: grid; place-items: center; background: var(--papel); border: 1px solid var(--linha); font-family: var(--titulo); font-size: 1.6rem; color: var(--batom); }
+  .passo h3 { font-size: 1.4rem; }
+  .passo p { color: var(--tinta-2); font-size: 1rem; }
+  .chips { display: flex; flex-wrap: wrap; gap: .6rem; margin-top: clamp(2.4rem, 4vw, 3.4rem); align-items: center; }
+  .chips strong { margin-right: .4rem; }
+  .chip { padding: .55rem 1rem; border-radius: 999px; background: var(--rose); font-weight: 500; font-size: .9375rem; }
+  .chip:nth-child(odd) { background: var(--salvia); }
+
+  /* CONSULTÓRIO + DÚVIDAS */
+  .duvidas .wrap { display: grid; grid-template-columns: .9fr 1.1fr; gap: clamp(1.5rem, 4vw, 3rem); align-items: start; }
+  .consultorio { background: var(--papel); border: 1px solid var(--linha); border-radius: var(--r-g); padding: clamp(1.6rem, 3vw, 2.4rem); display: grid; gap: 1.4rem; position: sticky; top: 90px; }
+  .consultorio-topo { display: flex; align-items: center; gap: 1rem; }
+  .consultorio-topo .redonda { flex: none; width: 86px; height: 86px; border-radius: 50%; overflow: hidden; }
+  .consultorio-topo img { width: 100%; height: 100%; object-fit: cover; }
+  .consultorio h2 { font-size: clamp(1.8rem, 3vw, 2.4rem); }
+  .dados { margin: 0; display: grid; gap: .9rem; }
+  .dados div { display: grid; gap: .1rem; padding-top: .9rem; border-top: 1px dashed var(--linha); }
+  .dados dt { font-size: .8125rem; font-weight: 700; color: var(--tinta-2); }
+  .dados dd { margin: 0; }
+  .consultorio .botao { justify-self: start; }
+  .faq h2 { font-size: var(--t-1); margin-bottom: 1.6rem; }
+  details { background: var(--papel); border-radius: var(--r-m); border: 1px solid var(--linha); margin-bottom: .7rem; transition: background .3s; }
+  details[open] { background: var(--rose); border-color: transparent; }
+  summary { list-style: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 1rem; padding: 1.15rem 1.3rem; font-weight: 600; font-size: 1.0625rem; }
+  summary::-webkit-details-marker { display: none; }
+  summary::after { content: "+"; flex: none; width: 34px; height: 34px; border-radius: 50%; display: grid; place-items: center; background: var(--fundo); font-size: 1.3rem; font-weight: 400; transition: transform .4s; }
+  details[open] summary::after { transform: rotate(45deg); background: var(--papel); }
+  details p { padding: 0 1.3rem 1.3rem; color: var(--tinta-2); max-width: 36rem; }
+
+  /* CTA */
+  .cta { padding-top: 0; }
+  .cta-caixa { position: relative; background: var(--rose); border-radius: clamp(28px, 4vw, 56px); padding: clamp(2.6rem, 6vw, 4.8rem); display: grid; grid-template-columns: 1.4fr .8fr; gap: 2rem; align-items: center; overflow: hidden; }
+  .cta h2 { font-size: var(--t-1); }
+  .cta p { color: var(--tinta-2); margin-top: 1rem; max-width: 30rem; }
+  .cta .hero-acoes { margin-top: 1.8rem; }
+  .cta-foto { position: relative; justify-self: center; width: 100%; max-width: 300px; aspect-ratio: 1; border-radius: 50%; background: var(--papel); overflow: hidden; }
+  .cta-foto img { position: absolute; left: 50%; top: 9%; width: 94%; transform: translateX(-50%); }
+
+  /* RODAPÉ */
+  .rodape { padding-block: 3rem 6rem; font-size: .9375rem; color: var(--tinta-2); }
+  .rodape .wrap { display: grid; gap: 1.6rem; }
+  .rodape-topo { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 1.4rem 3rem; padding-bottom: 1.6rem; border-bottom: 1px solid var(--linha); }
+  .rodape-topo strong { display: block; color: var(--tinta); }
+  .rodape-avisos { display: grid; gap: .3rem; font-size: .875rem; }
+
+  .zap-fixo { display: none; }
+
+  @media (max-width: 960px) {
+    .nav-links { display: none; }
+    .hero .wrap, .historia .wrap, .duvidas .wrap, .cta-caixa { grid-template-columns: 1fr; }
+    .hero-arte { max-width: 460px; }
+    .cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .passos { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 2.2rem; }
+    .linha-passos { display: none; }
+    .consultorio { position: static; }
+    .cta-foto { max-width: 220px; }
+  }
+  @media (max-width: 600px) {
+    .nav-cta { padding-left: 0; border-left: 0; font-size: .6875rem; letter-spacing: .14em; }
+    .nav-cta::after { left: 0; }
+    .marca strong { font-size: 1.2rem; }
+    .marca small { font-size: .5625rem; }
+    .selo-previa { display: none; right: auto; left: 50%; transform: translateX(-50%); bottom: calc(76px + env(safe-area-inset-bottom, 0px)); white-space: nowrap; }
+    .cards, .passos { grid-template-columns: 1fr; }
+    .hero h1 { font-size: clamp(2.5rem, 11vw, 3.4rem); }
+    .zap-fixo { display: inline-flex; position: fixed; left: 50%; transform: translateX(-50%); bottom: calc(14px + env(safe-area-inset-bottom, 0px)); z-index: 60; box-shadow: 0 14px 30px -12px rgb(30 38 32 / .55); white-space: nowrap; }
+    .zap-fixo:hover { transform: translateX(-50%); }
+  }
+  @media (prefers-reduced-motion: reduce) { .selo svg, .flutua { animation: none; } html { scroll-behavior: auto; } }
+</style>
+</head>
+<body>
+<header class="nav">
+  <div class="wrap">
+    <a class="marca" href="#topo"><strong>Marília Souza</strong><small>Nutricionista · Suzano</small></a>
+    <nav class="nav-links" aria-label="Seções">
+      <a href="#semana">O método</a>
+      <a href="#como">Como funciona</a>
+      <a href="#duvidas">Dúvidas</a>
+    </nav>
+    <a class="nav-cta" href="https://wa.me/5511910746161?text=Ol%C3%A1%2C%20Mar%C3%ADlia!%20Vim%20pelo%20site%20e%20queria%20saber%20como%20funciona%20o%20acompanhamento." target="_blank" rel="noopener">Agendar <span>→</span></a>
+  </div>
+</header>
+<div class="selo-previa">Prévia AlgUp · para aprovação</div>
+
+<main id="topo">
+  <section class="hero">
+    <div class="wrap">
+      <div class="hero-texto">
+        <span class="pilula" data-sobe><i></i>Nutricionista em Suzano e região</span>
+        <h1>Emagrecer sem viver <em>refém<svg class="rabisco" viewBox="0 0 120 60" preserveAspectRatio="none" aria-hidden="true"><path d="M8 34 C 14 10, 70 4, 104 14 C 124 22, 112 50, 70 54 C 34 58, 2 48, 6 30 C 9 18, 40 8, 88 10"/></svg></em> de dieta.</h1>
+        <p class="hero-apoio" data-sobe>Oi, eu sou a Marília, mas pode me chamar de Má. Há mais de 14 anos ajudo mulheres a organizar a alimentação de um jeito que cabe na rotina, sem cortar o que gostam.</p>
+        <div class="hero-acoes" data-sobe>
+          <a class="botao" href="https://wa.me/5511910746161?text=Ol%C3%A1%2C%20Mar%C3%ADlia!%20Vim%20pelo%20site%20e%20queria%20saber%20como%20funciona%20o%20acompanhamento." target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2c-1.5 0-3-.4-4.3-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.3-.4.8-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.5-.3Z"/></svg>
+            Conversar pelo WhatsApp</a>
+          <a class="botao botao-claro" href="#semana">Ver como funciona</a>
+        </div>
+        <div class="hero-dados" data-sobe>
+          <span class="pilula">CRN-3 nº a confirmar<!-- confirmar --></span>
+          <span class="pilula">Consultório em frente à Prefeitura</span>
+        </div>
+      </div>
+      <div class="hero-arte">
+        <div class="circulo"></div>
+        <img class="ma" src="img/ma-recorte.webp" alt="Marília Souza, de blusa branca, sorrindo" fetchpriority="high">
+        <div class="bolha bolha-1 flutua"><img src="img/seg-cafe.webp" alt="Xícara de café"></div>
+        <div class="bolha bolha-2 flutua"><img src="img/sab-brigadeiro.webp" alt="Brigadeiros"></div>
+        <div class="selo" aria-label="Método Você Mais Magra">
+          <svg viewBox="0 0 120 120" aria-hidden="true"><defs><path id="roda" d="M60 60 m-46 0 a46 46 0 1 1 92 0 a46 46 0 1 1 -92 0"/></defs><text><textPath href="#roda">método você mais magra · método você mais magra ·</textPath></text></svg>
+          <span>Má</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="faixa-gigante" aria-hidden="true"><p>comida de verdade <i>·</i> <b>sem dieta</b> <i>·</i> rotina possível <i>·</i> <b>sem culpa</b> <i>·</i> comida de verdade <i>·</i> <b>sem dieta</b> <i>·</i></p></div>
+
+  <section class="paraquem" id="paraquem">
+    <div class="wrap">
+      <div class="titulo-sec" data-sobe>
+        <h2>É para você que…</h2>
+      </div>
+      <div class="cards">
+        <article class="card" data-sobe><svg class="check" viewBox="0 0 44 44" aria-hidden="true"><circle cx="22" cy="22" r="20"/><path d="M14 22.5l5.5 5.5L30.5 17"/></svg><h3>Já tentou várias dietas</h3><p>E sempre volta ao ponto zero. Aqui o plano nasce da sua rotina, não de uma lista de proibidos.</p></article>
+        <article class="card" data-sobe><svg class="check" viewBox="0 0 44 44" aria-hidden="true"><circle cx="22" cy="22" r="20"/><path d="M14 22.5l5.5 5.5L30.5 17"/></svg><h3>Tem a rotina corrida</h3><p>E não consegue seguir plano impossível. Horários, marmita e compras organizados com você.</p></article>
+        <article class="card" data-sobe><svg class="check" viewBox="0 0 44 44" aria-hidden="true"><circle cx="22" cy="22" r="20"/><path d="M14 22.5l5.5 5.5L30.5 17"/></svg><h3>Quer cuidar de si sem sofrer</h3><p>Nada de terrorismo alimentar. Comida de verdade, do jeito que você gosta.</p></article>
+        <article class="card" data-sobe><svg class="check" viewBox="0 0 44 44" aria-hidden="true"><circle cx="22" cy="22" r="20"/><path d="M14 22.5l5.5 5.5L30.5 17"/></svg><h3>Quer se sentir bem de novo</h3><p>No próprio corpo, com alguém do seu lado em cada semana do processo.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="semana" id="semana">
+    <div class="wrap semana-topo">
+      <div class="titulo-sec" data-sobe>
+        <h2>Uma semana com <em>a Má</em></h2>
+        <p>No método Você Mais Magra, o plano é ajustado toda semana pelo WhatsApp, conforme a sua rotina muda. A vida real entra no plano.</p>
+      </div>
+      <div class="setas">
+        <button class="seta" data-ant aria-label="Dia anterior"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M15 5l-7 7 7 7"/></svg></button>
+        <button class="seta" data-prox aria-label="Próximo dia"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 5l7 7-7 7"/></svg></button>
+      </div>
+    </div>
+    <div class="embla">
+      <div class="embla__trilho">
+        <article class="dia"><div class="dia-foto"><img src="img/seg-cafe.webp" alt="Xícara de café com a luz da janela" loading="lazy"></div><div class="dia-corpo"><span class="dia-nome">Segunda</span><h3>Saiu sem tomar café</h3><p>Um café da manhã que fica pronto em cinco minutos e segura até o almoço.</p></div></article>
+        <article class="dia"><div class="dia-foto"><img src="img/ter-marmita.webp" alt="Marmita com arroz, grão-de-bico e legumes" loading="lazy"></div><div class="dia-corpo"><span class="dia-nome">Terça</span><h3>A marmita da semana</h3><p>Uma base que se repete e muda de cara, sem passar o domingo na cozinha.</p></div></article>
+        <article class="dia"><div class="dia-foto"><img src="img/qua-feira.webp" alt="Caixotes de legumes numa feira" loading="lazy"></div><div class="dia-corpo"><span class="dia-nome">Quarta</span><h3>As compras</h3><p>Lista pensada para o seu cardápio. Sem produto caro de dieta.</p></div></article>
+        <article class="dia"><div class="dia-foto"><img src="img/qui-cozinha.webp" alt="Mãos picando cheiro-verde" loading="lazy"></div><div class="dia-corpo"><span class="dia-nome">Quinta</span><h3>Receita simples</h3><p>Do jeito que você já cozinha, com horários que funcionam no seu dia.</p></div></article>
+        <article class="dia"><div class="dia-foto"><img src="img/sex-jantar.webp" alt="Prato simples de feijão com ovo" loading="lazy"></div><div class="dia-corpo"><span class="dia-nome">Sexta</span><h3>Chegou cansada</h3><p>Um plano B pronto para a noite em que tudo dá errado. E está tudo bem.</p></div></article>
+        <article class="dia"><div class="dia-foto"><img src="img/sab-brigadeiro.webp" alt="Bandeja de brigadeiros" loading="lazy"></div><div class="dia-corpo"><span class="dia-nome">Sábado</span><h3>Teve brigadeiro</h3><p>O doce do aniversário entra no plano. Sem culpa e sem compensar depois.</p></div></article>
+        <article class="dia"><div class="dia-foto"><img src="img/dom-almoco.webp" alt="Prato de almoço com arroz, feijão e banana" loading="lazy"></div><div class="dia-corpo"><span class="dia-nome">Domingo</span><h3>Almoço de família</h3><p>Continua sendo de domingo. Na segunda, a gente conversa e ajusta a semana.</p></div></article>
+      </div>
+    </div>
+    <div class="pontos" aria-hidden="true"></div>
+  </section>
+
+  <section class="historia" id="historia">
+    <div class="wrap">
+      <div class="arco" data-sobe><img src="img/ma-rindo-recorte.webp" alt="Marília Souza rindo, de blazer branco" loading="lazy"></div>
+      <div class="citacao" data-sobe>
+        <blockquote>“Eu já emagreci 17 quilos e passei pelo efeito sanfona. Em todos esses anos de consultório, vi que não faltava força de vontade. <mark>Faltava estratégia.</mark>”</blockquote>
+        <p>Por isso o meu trabalho é ajudar você a encontrar um caminho possível, sem dietas restritivas e sem viver refém da balança.</p>
+        <p class="assina">Marília Souza <span>· nutricionista, foco em emagrecimento feminino</span></p>
+      </div>
+    </div>
+  </section>
+
+  <section class="como" id="como">
+    <div class="wrap">
+      <div class="titulo-sec" data-sobe>
+        <h2>Como funciona o acompanhamento</h2>
+        <p>Ninguém vai te entregar um cardápio pronto e sumir.</p>
+      </div>
+      <div class="passos-caixa" style="position:relative">
+        <span class="linha-passos" aria-hidden="true"></span>
+        <ol class="passos">
+          <li class="passo" data-sobe><span class="num">1</span><h3>Você chama no WhatsApp</h3><p>A gente entende o seu momento e marca o melhor horário.</p></li>
+          <li class="passo" data-sobe><span class="num">2</span><h3>Consulta inicial</h3><p>No consultório, com calma: rotina, horários, exames e o que você gosta de comer.</p></li>
+          <li class="passo" data-sobe><span class="num">3</span><h3>Plano para a sua vida</h3><p>Individual, com as comidas que você gosta e a rotina organizada.</p></li>
+          <li class="passo" data-sobe><span class="num">4</span><h3>Ajustes toda semana</h3><p>Pelo WhatsApp, acompanhando de perto quando a rotina muda.</p></li>
+        </ol>
+      </div>
+      <div class="chips" data-sobe><strong>E ainda tem a comunidade:</strong><span class="chip">desafios no WhatsApp</span><span class="chip">aulas de autocuidado</span><span class="chip">encontros com parceiros da região</span><span class="chip">conteúdos exclusivos</span></div>
+    </div>
+  </section>
+
+  <section class="duvidas" id="duvidas">
+    <div class="wrap">
+      <aside class="consultorio" data-sobe>
+        <div class="consultorio-topo"><div class="redonda"><img src="img/maos.webp" alt="Mãos picando um legume" loading="lazy"></div><h2>O consultório</h2></div>
+        <dl class="dados">
+          <div><dt>Endereço</dt><dd>Rua Paraná, Edifício Orion, em frente à Prefeitura de Suzano<!-- confirmar número e sala --></dd></div>
+          <div><dt>Atendimento</dt><dd>Particular e individual, com nota fiscal para pedir reembolso ao convênio</dd></div>
+          <div><dt>Agendamento</dt><dd>Pelo WhatsApp (11) 91074-6161<!-- confirmar horário --></dd></div>
+        </dl>
+        <a class="botao botao-claro" href="https://www.google.com/maps/search/?api=1&query=Rua%20Paran%C3%A1%20Edif%C3%ADcio%20Orion%20Suzano%20SP" target="_blank" rel="noopener">Ver como chegar</a>
+      </aside>
+      <div class="faq">
+        <h2 data-sobe>Ficou com dúvida?</h2>
+        <details><summary>Posso emagrecer sem abrir mão do que gosto?</summary><p>Sim. O método trabalha com ajustes, não com cortes. As comidas de que você gosta entram no plano.</p></details>
+        <details><summary>Funciona para quem já tentou várias dietas?</summary><p>Ele foi pensado justamente para mulheres que já passaram por isso e querem um caminho que se sustente.</p></details>
+        <details><summary>Em quanto tempo vejo diferença?</summary><p>Cada corpo tem o seu tempo. Com constância e acompanhamento de perto, o foco é uma mudança que dure, não um milagre.</p></details>
+        <details><summary>Você atende plano de saúde?</summary><p>Os atendimentos são particulares. Você recebe a nota fiscal e pode pedir o reembolso ao seu convênio.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta" id="contato">
+    <div class="wrap">
+      <div class="cta-caixa" data-sobe>
+        <div>
+          <h2>O primeiro passo é uma conversa.</h2>
+          <p>Me chama no WhatsApp. Eu entendo o seu momento e explico como funciona o acompanhamento, sem compromisso.</p>
+          <div class="hero-acoes">
+            <a class="botao" href="https://wa.me/5511910746161?text=Ol%C3%A1%2C%20Mar%C3%ADlia!%20Vim%20pelo%20site%20e%20queria%20saber%20como%20funciona%20o%20acompanhamento." target="_blank" rel="noopener">Conversar pelo WhatsApp</a>
+          </div>
+        </div>
+        <div class="cta-foto"><img src="img/ma-recorte.webp" alt="" loading="lazy"></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="rodape">
+  <div class="wrap">
+    <div class="rodape-topo">
+      <div><strong>Marília Souza, nutricionista</strong>CRN-3 nº a confirmar<!-- confirmar --></div>
+      <div><strong>Consultório</strong>Rua Paraná, Ed. Orion, Suzano, SP</div>
+      <div><strong>Contato</strong>(11) 91074-6161 · <a href="#">Política de privacidade</a></div>
+    </div>
+    <div class="rodape-avisos">
+      <span>As informações deste site são educativas e não substituem a consulta individual com a nutricionista.</span>
+      <span>Os resultados podem não ocorrer da mesma forma para todas as pessoas.</span>
+      <span>© 2026 Marília Souza · Site: AlgUp Digital</span>
+    </div>
+  </div>
+</footer>
+<a class="botao zap-fixo" href="https://wa.me/5511910746161?text=Ol%C3%A1%2C%20Mar%C3%ADlia!%20Vim%20pelo%20site%20e%20queria%20saber%20como%20funciona%20o%20acompanhamento." target="_blank" rel="noopener">Conversar pelo WhatsApp</a>
+
+<script src="https://cdn.jsdelivr.net/npm/motion@11.11.13/dist/motion.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/embla-carousel@8.5.1/embla-carousel.umd.js"></script>
+<script>
+(() => {
+  // Carrossel da semana (sem Embla vira rolagem lateral nativa)
+  const raiz = document.querySelector(".embla");
+  if (window.EmblaCarousel && raiz) {
+    const embla = EmblaCarousel(raiz, { align: "start", containScroll: "trimSnaps" });
+    document.querySelector("[data-ant]").onclick = () => embla.scrollPrev();
+    document.querySelector("[data-prox]").onclick = () => embla.scrollNext();
+    const pontos = document.querySelector(".pontos");
+    const desenhar = () => {
+      pontos.innerHTML = embla.scrollSnapList().map((_, i) => `<button class="${i === embla.selectedScrollSnap() ? "ativo" : ""}"></button>`).join("");
+      [...pontos.children].forEach((b, i) => b.onclick = () => embla.scrollTo(i));
+    };
+    embla.on("select", desenhar).on("reInit", desenhar); desenhar();
+  } else if (raiz) { raiz.style.overflowX = "auto"; }
+
+  // nav ganha fundo ao rolar
+  const nav = document.querySelector(".nav");
+  const marcar = () => nav.classList.toggle("rolou", scrollY > 10);
+  addEventListener("scroll", marcar, { passive: true }); marcar();
+
+  // Animações: o conteúdo nasce VISÍVEL no HTML; só é escondido aqui, logo antes de observar.
+  const M = window.Motion;
+  const estatico = /estatico/.test(location.search) || matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (!M || estatico) { document.documentElement.classList.remove("intro"); return; }
+  const { animate, inView, scroll, stagger } = M;
+  const suave = [.2, .8, .2, 1];
+  const docEl = document.documentElement;
+
+  // INTRO DO HERO: título palavra por palavra com máscara, arco cresce, foto sobe de dentro do arco
+  const h1 = document.querySelector(".hero h1");
+  const embrulhar = (no) => [...no.childNodes].forEach(n => {
+    if (n.nodeType === 3) {
+      const frag = document.createDocumentFragment();
+      n.textContent.split(/(\s+)/).forEach(t => {
+        if (!t) return;
+        if (/^\s+$/.test(t)) { frag.append(t); return; }
+        const w = document.createElement("span"); w.className = "palavra";
+        const i = document.createElement("span"); i.textContent = t; w.append(i); frag.append(w);
+      });
+      n.replaceWith(frag);
+    } else if (n.nodeName === "EM") embrulhar(n);
+  });
+  embrulhar(h1);
+  const pal = h1.querySelectorAll(".palavra > span");
+  pal.forEach(p => p.style.opacity = 0);
+  const arte = document.querySelector(".hero-arte");
+  const circ = arte.querySelector(".circulo"), ma = arte.querySelector(".ma");
+  const bolhas = arte.querySelectorAll(".bolha"), selo = arte.querySelector(".selo");
+  [circ, ma, ...bolhas, selo].forEach(e => e.style.opacity = 0);
+  const rab = h1.querySelector(".rabisco path");
+  const L = rab.getTotalLength(); rab.style.strokeDasharray = L; rab.style.strokeDashoffset = L;
+  docEl.classList.remove("intro");
+  animate(pal, { opacity: [1, 1], y: ["110%", "0%"], rotate: [4, 0] }, { duration: 1, delay: stagger(.09, { start: .15 }), easing: [.16, 1, .3, 1] });
+  animate(circ, { opacity: [1, 1], scale: [0, 1] }, { duration: 1.2, delay: .2, easing: [.16, 1, .3, 1] });
+  animate(ma, { opacity: [0, 1], clipPath: ["inset(100% 0 0 0)", "inset(0% 0 0 0)"], filter: ["blur(8px)", "blur(0px)"] }, { duration: 1.3, delay: .55, easing: [.16, 1, .3, 1] });
+  animate(bolhas, { opacity: [0, 1], scale: [0, 1] }, { delay: stagger(.15, { start: 1.2 }), type: "spring", stiffness: 260, damping: 14 });
+  animate(selo, { opacity: [0, 1], scale: [0, 1], rotate: [-120, 0] }, { duration: 1, delay: 1.45, easing: [.16, 1, .3, 1] });
+  rab.getBoundingClientRect(); rab.style.transition = "stroke-dashoffset 1.1s cubic-bezier(.65,0,.35,1) 1.3s"; requestAnimationFrame(() => rab.style.strokeDashoffset = 0);
+
+  // rolagem: arte do hero sobe devagar e a faixa gigante corre de lado
+  scroll(animate(arte, { y: [0, -70] }, { easing: "linear" }), { target: document.querySelector(".hero"), offset: ["start start", "end start"] });
+  const fg = document.querySelector(".faixa-gigante p");
+  if (fg) scroll(animate(fg, { x: ["0%", "-35%"] }, { easing: "linear" }), { target: document.querySelector(".faixa-gigante"), offset: ["start end", "end start"] });
+  document.querySelectorAll("[data-sobe]").forEach(el => {
+    if (el.closest(".hero")) { const o = [...el.parentNode.children].indexOf(el); animate(el, { opacity: [0, 1], y: [24, 0] }, { duration: .9, delay: .6 + .1 * o, easing: suave }); return; }
+    const ordem = [...el.parentNode.children].indexOf(el);
+    if (el.getBoundingClientRect().top < innerHeight * .95) {   // já na tela: entra no carregamento
+      animate(el, { opacity: [0, 1], y: [28, 0] }, { duration: .9, delay: .08 * ordem, easing: suave });
+      return;
+    }
+    el.style.opacity = 0;
+    inView(el, () => { animate(el, { opacity: [0, 1], y: [36, 0] }, { duration: .9, delay: .06 * (ordem % 4), easing: suave }); }, { amount: .1 });
+  });
+  // checks que se desenham nos cards
+  inView(".cards", (info) => {
+    const alvo = info.target || info;
+    animate(alvo.querySelectorAll(".check circle"), { strokeDashoffset: [126, 0] }, { duration: 1, delay: stagger(.15) });
+    animate(alvo.querySelectorAll(".check path"), { strokeDashoffset: [24, 0] }, { duration: .5, delay: stagger(.15, { start: .6 }) });
+  }, { amount: .3 });
+  // linha tracejada dos passos acompanha a rolagem
+  const linha = document.querySelector(".linha-passos");
+  if (linha) scroll(animate(linha, { scaleX: [0, 1] }, { easing: "linear" }), { target: document.querySelector(".passos"), offset: ["start end", "center center"] });
+  // seguro: nada fica invisível se o observador falhar
+  const mostrarTudo = () => document.querySelectorAll("[data-sobe]").forEach(el => {
+    const r = el.getBoundingClientRect(); if (r.top < innerHeight && r.bottom > 0 && getComputedStyle(el).opacity === "0") el.style.opacity = 1;
+  });
+  addEventListener("scrollend", () => setTimeout(mostrarTudo, 1200));
+  setTimeout(mostrarTudo, 3000);
+})();
+</script>
+</body>
+</html>
